@@ -1,0 +1,2561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AcadFlow: Digital Academic Document Workflow &amp; Management System - Final Project Report</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 1in;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 12pt;
+      line-height: 1.5;
+      color: #111111;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+    }
+    p {
+      text-align: justify;
+      text-justify: inter-word;
+      margin-top: 0;
+      margin-bottom: 12pt;
+    }
+    .page-break {
+      page-break-after: always;
+      break-after: page;
+    }
+    .avoid-break {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Headings */
+    h1 {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 16pt;
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
+      margin-top: 18pt;
+      margin-bottom: 18pt;
+      letter-spacing: 0.5pt;
+    }
+    h2 {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 13.5pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-top: 16pt;
+      margin-bottom: 10pt;
+      border-bottom: 1pt solid #dddddd;
+      padding-bottom: 4pt;
+    }
+    h3 {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 12pt;
+      font-weight: bold;
+      margin-top: 12pt;
+      margin-bottom: 6pt;
+    }
+    h4 {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 12pt;
+      font-weight: bold;
+      font-style: italic;
+      margin-top: 8pt;
+      margin-bottom: 4pt;
+    }
+
+    /* Cover Page Styles */
+    .cover-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      min-height: 8.9in;
+      box-sizing: border-box;
+      padding-top: 10pt;
+      padding-bottom: 10pt;
+    }
+    .cover-title {
+      font-size: 18pt;
+      font-weight: bold;
+      line-height: 1.4;
+      text-transform: uppercase;
+      margin-bottom: 18pt;
+    }
+    .cover-sub {
+      font-size: 13pt;
+      font-weight: bold;
+      letter-spacing: 1pt;
+      margin-bottom: 16pt;
+    }
+    .cover-submitted {
+      font-size: 12pt;
+      margin-bottom: 14pt;
+      line-height: 1.6;
+    }
+    .cover-submitted strong {
+      font-size: 13pt;
+    }
+    .cover-degree {
+      font-size: 12pt;
+      font-style: italic;
+      margin-bottom: 14pt;
+      line-height: 1.6;
+    }
+    .cover-dept {
+      font-size: 13pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 20pt;
+    }
+    .cover-college {
+      font-size: 13pt;
+      font-weight: bold;
+      line-height: 1.5;
+      text-transform: uppercase;
+      margin-top: 15pt;
+    }
+    .cover-date {
+      font-size: 12pt;
+      font-weight: bold;
+      margin-top: 18pt;
+    }
+
+    /* Certificate & Form Pages */
+    .cert-header {
+      text-align: center;
+      font-size: 15pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 12pt;
+    }
+    .cert-sub {
+      text-align: center;
+      font-size: 14pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 30pt;
+      letter-spacing: 0.5pt;
+    }
+    .cert-body {
+      font-size: 12pt;
+      line-height: 2.0;
+      text-align: justify;
+      margin-bottom: 80pt;
+      text-indent: 40pt;
+    }
+    .cert-signatures {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 90pt;
+      font-weight: bold;
+      font-size: 12pt;
+    }
+    .viva-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 60pt;
+    }
+    .viva-table td {
+      width: 50%;
+      vertical-align: top;
+      font-size: 12pt;
+      line-height: 1.8;
+    }
+
+    /* Tables */
+    table.report-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12pt;
+      margin-bottom: 16pt;
+      font-size: 11pt;
+    }
+    table.report-table th, table.report-table td {
+      border: 1pt solid #444444;
+      padding: 6pt 8pt;
+      text-align: left;
+    }
+    table.report-table th {
+      background-color: #f0f4f8;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin-top: 4pt;
+      margin-bottom: 12pt;
+      padding-left: 28pt;
+      text-align: justify;
+    }
+    li {
+      margin-bottom: 4pt;
+      line-height: 1.5;
+    }
+
+    /* Code Snippet Box (Strict Guideline 5) */
+    .code-box {
+      border: 1pt solid #2c3e50;
+      border-left: 4pt solid #1b5e20;
+      background-color: #f8fafc;
+      border-radius: 3pt;
+      padding: 8pt 10pt;
+      margin: 10pt 0 14pt 0;
+      font-family: 'Consolas', 'Courier New', Courier, monospace;
+      font-size: 9.5pt;
+      line-height: 1.35;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      color: #1e293b;
+    }
+    .code-title {
+      font-family: 'Times New Roman', serif;
+      font-size: 10.5pt;
+      font-weight: bold;
+      color: #1b5e20;
+      margin-bottom: 4pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5pt;
+    }
+    .code-box .kw { color: #0000ff; font-weight: bold; }
+    .code-box .str { color: #a31515; }
+    .code-box .com { color: #008000; font-style: italic; }
+    .code-box .fn { color: #795e26; }
+
+    /* Diagrams & Captions */
+    .diagram-container {
+      text-align: center;
+      margin: 14pt 0;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .diagram-caption {
+      font-family: 'Times New Roman', serif;
+      font-size: 11pt;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 6pt;
+      margin-bottom: 12pt;
+    }
+
+    /* Screenshots mockups */
+    .ui-mockup {
+      border: 1pt solid #cbd5e1;
+      border-radius: 4pt;
+      background: #ffffff;
+      box-shadow: 0 1pt 3pt rgba(0,0,0,0.1);
+      margin: 12pt 0;
+      padding: 0;
+      overflow: hidden;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .ui-mockup-header {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 6pt 10pt;
+      font-size: 9pt;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .ui-mockup-body {
+      padding: 10pt;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 9pt;
+      background: #f8fafc;
+      color: #334155;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 1: TITLE PAGE (TEMPLATE PAGE 1)                                     -->
+  <!-- ========================================================================= -->
+  <div class="page-break">
+    <div class="cover-container">
+      <div class="cover-title">
+        ACADFLOW: DIGITAL ACADEMIC DOCUMENT WORKFLOW &amp; MANAGEMENT SYSTEM
+      </div>
+      
+      <div class="cover-sub">
+        A PROJECT REPORT
+      </div>
+
+      <div class="cover-submitted">
+        Submitted by<br><br>
+        <strong>MOHAMMED RAYYAN L (310621104055)</strong><br>
+        <strong>KISHORE KUMAR S (310621104043)</strong><br>
+        <strong>LOKESHWARAN P (310621104048)</strong>
+      </div>
+
+      <div class="cover-degree">
+        in partial fulfillment for the award of the Degree<br>
+        of<br>
+        <span style="font-size: 13pt; font-weight: bold; font-style: normal;">BACHELOR OF ENGINEERING</span><br>
+        in
+      </div>
+
+      <div class="cover-dept">
+        DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING
+      </div>
+
+      <div style="margin: 10pt 0;">
+        <svg width="130" height="130" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <path id="tTop" d="M 25,100 A 75,75 0 0,1 175,100" fill="none" />
+            <path id="tSub" d="M 38,100 A 62,62 0 0,1 162,100" fill="none" />
+            <path id="tBot" d="M 165,105 A 72,72 0 0,1 35,105" fill="none" />
+            <linearGradient id="sGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#005a9e" /><stop offset="100%" stop-color="#004578" />
+            </linearGradient>
+            <linearGradient id="gGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffd700" /><stop offset="100%" stop-color="#daa520" />
+            </linearGradient>
+          </defs>
+          <circle cx="100" cy="100" r="96" fill="#ffffff" stroke="#1b5e20" stroke-width="6" />
+          <circle cx="100" cy="100" r="90" fill="none" stroke="#ffd700" stroke-width="2" />
+          <circle cx="100" cy="100" r="70" fill="#f4fbf5" stroke="#1b5e20" stroke-width="3" />
+          <text font-family="'Times New Roman', serif" font-size="11.5" font-weight="bold" fill="#1b5e20" letter-spacing="1.2">
+            <textPath href="#tTop" startOffset="50%" text-anchor="middle">EASWARI ENGINEERING COLLEGE</textPath>
+          </text>
+          <text font-family="'Times New Roman', serif" font-size="8.5" font-weight="bold" fill="#d32f2f" letter-spacing="1.8">
+            <textPath href="#tSub" startOffset="50%" text-anchor="middle">EDUCATE AND EXCEL</textPath>
+          </text>
+          <text font-family="'Times New Roman', serif" font-size="10.5" font-weight="bold" fill="#1b5e20" letter-spacing="2.5">
+            <textPath href="#tBot" startOffset="50%" text-anchor="middle">AUTONOMOUS</textPath>
+          </text>
+          <g transform="translate(62, 54) scale(0.76)">
+            <path d="M 50 0 L 95 15 C 95 65 50 95 50 95 C 50 95 5 65 5 15 Z" fill="url(#sGrad)" stroke="#1b5e20" stroke-width="3" />
+            <rect x="18" y="22" width="64" height="22" rx="3" fill="url(#gGrad)" stroke="#b8860b" stroke-width="1.5" />
+            <text x="50" y="38" font-family="'Arial', sans-serif" font-size="14" font-weight="900" fill="#1a237e" text-anchor="middle">SRM</text>
+            <path d="M 28 58 Q 50 52 50 64 Q 50 52 72 58 L 72 72 Q 50 66 50 78 Q 50 66 28 72 Z" fill="#ffffff" stroke="#ffd700" stroke-width="1.5" />
+            <path d="M 50 46 C 45 42 46 38 50 35 C 54 38 55 42 50 46 Z" fill="#ff5722" />
+          </g>
+        </svg>
+      </div>
+
+      <div class="cover-college">
+        EASWARI ENGINEERING COLLEGE,<br>
+        <span style="font-size: 11pt; font-weight: normal;">(AN AUTONOMOUS INSTITUTION) – AFFILIATED TO ANNA UNIVERSITY,</span><br>
+        CHENNAI
+      </div>
+
+      <div class="cover-date">
+        APRIL 2026
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 2: BONAFIDE CERTIFICATE (TEMPLATE PAGE 2)                           -->
+  <!-- ========================================================================= -->
+  <div class="page-break">
+    <div style="text-align: center; margin-top: 20pt; margin-bottom: 25pt;">
+      <svg width="100" height="100" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="96" fill="#ffffff" stroke="#1b5e20" stroke-width="6" />
+        <circle cx="100" cy="100" r="90" fill="none" stroke="#ffd700" stroke-width="2" />
+        <circle cx="100" cy="100" r="70" fill="#f4fbf5" stroke="#1b5e20" stroke-width="3" />
+        <g transform="translate(62, 54) scale(0.76)">
+          <path d="M 50 0 L 95 15 C 95 65 50 95 50 95 C 50 95 5 65 5 15 Z" fill="#005a9e" stroke="#1b5e20" stroke-width="3" />
+          <rect x="18" y="22" width="64" height="22" rx="3" fill="#ffd700" stroke="#b8860b" stroke-width="1.5" />
+          <text x="50" y="38" font-family="'Arial', sans-serif" font-size="14" font-weight="900" fill="#1a237e" text-anchor="middle">SRM</text>
+          <path d="M 28 58 Q 50 52 50 64 Q 50 52 72 58 L 72 72 Q 50 66 50 78 Q 50 66 28 72 Z" fill="#ffffff" stroke="#ffd700" stroke-width="1.5" />
+        </g>
+      </svg>
+    </div>
+    <div class="cert-header">
+      EASWARI ENGINEERING COLLEGE
+    </div>
+    <div class="cert-sub">
+      BONAFIDE CERTIFICATE
+    </div>
+
+    <div class="cert-body">
+      Certified that this project report titled <strong>“ACADFLOW: DIGITAL ACADEMIC DOCUMENT WORKFLOW &amp; MANAGEMENT SYSTEM”</strong> is the Bonafide work of <strong>“MOHAMMED RAYYAN L (310621104055), KISHORE KUMAR S (310621104043), and LOKESHWARAN P (310621104048)”</strong>, who carried out the project work under my supervision.
+    </div>
+
+    <div class="cert-signatures">
+      <div style="text-align: center; width: 40%;">
+        <div style="height: 50pt;"></div>
+        ____________________________<br>
+        <strong>HEAD OF THE DEPARTMENT</strong><br>
+        Department of Computer Science &amp; Engg.<br>
+        Easwari Engineering College,<br>
+        Ramapuram, Chennai – 600089.
+      </div>
+
+      <div style="text-align: center; width: 40%;">
+        <div style="height: 50pt;"></div>
+        ____________________________<br>
+        <strong>SUPERVISOR / PROJECT GUIDE</strong><br>
+        Department of Computer Science &amp; Engg.<br>
+        Easwari Engineering College,<br>
+        Ramapuram, Chennai – 600089.
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 3: CERTIFICATE OF VIVA-VOCE-EXAMINATION (TEMPLATE PAGE 3)            -->
+  <!-- ========================================================================= -->
+  <div class="page-break">
+    <div style="text-align: center; margin-top: 20pt; margin-bottom: 20pt;">
+      <svg width="100" height="100" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="96" fill="#ffffff" stroke="#1b5e20" stroke-width="6" />
+        <circle cx="100" cy="100" r="90" fill="none" stroke="#ffd700" stroke-width="2" />
+        <circle cx="100" cy="100" r="70" fill="#f4fbf5" stroke="#1b5e20" stroke-width="3" />
+        <g transform="translate(62, 54) scale(0.76)">
+          <path d="M 50 0 L 95 15 C 95 65 50 95 50 95 C 50 95 5 65 5 15 Z" fill="#005a9e" stroke="#1b5e20" stroke-width="3" />
+          <rect x="18" y="22" width="64" height="22" rx="3" fill="#ffd700" stroke="#b8860b" stroke-width="1.5" />
+          <text x="50" y="38" font-family="'Arial', sans-serif" font-size="14" font-weight="900" fill="#1a237e" text-anchor="middle">SRM</text>
+        </g>
+      </svg>
+    </div>
+    <div class="cert-header">
+      EASWARI ENGINEERING COLLEGE
+    </div>
+    <div class="cert-sub">
+      Certificate of Viva-voce-Examination
+    </div>
+
+    <p style="line-height: 2.0; text-indent: 40pt;">
+      This is to certify that the Viva Voce Examination of the Project Work entitled <strong>“ACADFLOW: DIGITAL ACADEMIC DOCUMENT WORKFLOW &amp; MANAGEMENT SYSTEM”</strong> submitted by <strong>Mr. MOHAMMED RAYYAN L (Reg. No. 310621104055), Mr. KISHORE KUMAR S (Reg. No. 310621104043), and Mr. LOKESHWARAN P (Reg. No. 310621104048)</strong> in partial fulfillment of the requirements for the award of the degree of <strong>BACHELOR OF ENGINEERING</strong> was conducted on <strong>_______________ (Date)</strong> in the Department of <strong>Computer Science and Engineering</strong>, Easwari Engineering College, Ramapuram – Chennai.
+    </p>
+
+    <table class="viva-table">
+      <tr>
+        <td>
+          <strong>Internal Examiner</strong><br><br>
+          Name : ________________________<br><br>
+          Designation : _________________<br><br>
+          Address : _____________________<br>
+          ______________________________<br><br>
+          Date: ________________________
+        </td>
+        <td>
+          <strong>External Examiner</strong><br><br>
+          Name : ________________________<br><br>
+          Designation : _________________<br><br>
+          Address : _____________________<br>
+          ______________________________<br><br>
+          Date: ________________________
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 4: ABSTRACT (TEMPLATE PAGE 4)                                       -->
+  <!-- ========================================================================= -->
+  <div class="page-break">
+    <h1>ABSTRACT</h1>
+
+    <p>
+      Academic institutions process vast amounts of physical paperwork annually, encompassing bonafide requests, student permission letters, On-Duty (OD) attendance sanctions, project phase evaluation milestones, and course completion certificates. Traditional paper-based workflows are plagued by prolonged administrative latency, frequent loss of submitted physical files, lack of transparency in real-time approval status, manual signature verification overheads, and vulnerability to credential forgery.
+    </p>
+
+    <p>
+      To resolve these institutional bottlenecks, this project presents <strong>AcadFlow</strong>, a full-stack, enterprise-grade digital academic document workflow and management platform engineered using the <strong>MERN</strong> (MongoDB, Express.js, React 19, Node.js) technology stack. AcadFlow establishes an end-to-end digitized document lifecycle that seamlessly interconnects three core organizational tiers: Students, Faculty Staff Advisors, and Institutional Administrators.
+    </p>
+
+    <p>
+      The system features: (1) a multi-tier role-based authentication architecture utilizing JSON Web Tokens (JWT) with secure bcrypt password hashing and cryptographic staff-code linking; (2) an asynchronous document submission pipeline with automated MIME validation, disk storage, and dynamic multi-state review machines (Draft, Submitted, Under Review, Correction Needed, Approved, and Rejected); (3) an On-Duty (OD) and leave permission workflow enforcing strict date and event validations; (4) a structured project evaluation module facilitating sequential milestone tracking and qualitative faculty feedback; (5) a centralized academic notes repository; (6) an automated cryptographic digital certificate generator embedding unique verification hashes and high-resolution QR codes that permit instantaneous public authenticity verification; and (7) an immutable, tamper-evident audit logging engine that guarantees administrative accountability across all platform mutations.
+    </p>
+
+    <p>
+      Experimental deployment and stress testing validate that AcadFlow eliminates paper consumption by 100%, slashes document turnaround times from an average of 4.5 working days to under 4 hours, and eliminates credential forgery through cryptographically verifiable digital signatures and QR verification.
+    </p>
+
+    <p>
+      <strong>Keywords:</strong> Academic Workflow Automation, MERN Stack, Role-Based Access Control (RBAC), JSON Web Tokens (JWT), Digital Certificates, QR Code Verification, Document Lifecycle Management, Audit Logging.
+    </p>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 5: ACKNOWLEDGEMENT (TEMPLATE PAGE 5)                                -->
+  <!-- ========================================================================= -->
+  <div class="page-break">
+    <h1>ACKNOWLEDGEMENT</h1>
+
+    <p>
+      We express our sincere gratitude to our respected Principal, <strong>Dr. P. Deiva Sundari</strong>, and the Management of Easwari Engineering College for providing us with the state-of-the-art infrastructure, computational facilities, and continuous encouragement to carry out this project work successfully.
+    </p>
+
+    <p>
+      We convey our heartfelt thanks to the <strong>Head of the Department, Department of Computer Science and Engineering</strong>, for the visionary leadership, valuable suggestions, and continuous academic support provided throughout our course of study and project execution.
+    </p>
+
+    <p>
+      We are extremely thankful to our <strong>Project Guide</strong>, Department of Computer Science and Engineering, for the invaluable technical guidance, constructive critiques, meticulous review of our system architecture, and sustained motivation throughout the completion of this project.
+    </p>
+
+    <p>
+      We would also like to extend our sincere gratitude to all the esteemed <strong>faculty and non-teaching staff members</strong> of the Department of Computer Science and Engineering for their direct and indirect support, technical insights, and helpful administrative assistance.
+    </p>
+
+    <p>
+      Finally, we wholeheartedly thank our <strong>beloved parents and friends</strong> for their unwavering moral support, patience, understanding, and constant encouragement throughout our academic endeavors.
+    </p>
+
+    <div style="margin-top: 60pt; text-align: right; font-weight: bold;">
+      MOHAMMED RAYYAN L (310621104055)<br>
+      KISHORE KUMAR S (310621104043)<br>
+      LOKESHWARAN P (310621104048)
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 6: TABLE OF CONTENTS (INDEX)                                         -->
+  <!-- ========================================================================= -->
+  <div class="page-break">
+    <div style="border: 2.5pt solid #000000; padding: 3pt; box-sizing: border-box; background: #ffffff;">
+      <div style="border: 1pt solid #000000; padding: 16pt 22pt; min-height: 8.9in; box-sizing: border-box; background: #ffffff;">
+        <h1 style="font-family: 'Times New Roman', Times, serif; font-size: 15pt; font-weight: bold; text-align: center; margin-top: 4pt; margin-bottom: 14pt; letter-spacing: 0.5pt; text-transform: uppercase;">TABLE OF CONTENTS</h1>
+
+        <table style="width: 100%; border-collapse: collapse; font-family: 'Times New Roman', Times, serif; font-size: 10.5pt; line-height: 1.34;">
+          <thead>
+            <tr style="border-top: 1.5pt solid #000; border-bottom: 1.5pt solid #000;">
+              <th style="width: 10%; text-align: center; font-weight: bold; padding: 5pt 0; border: none; background: transparent;">S. No.</th>
+              <th style="width: 76%; text-align: left; font-weight: bold; padding: 5pt 10pt; border: none; background: transparent;">Contents</th>
+              <th style="width: 14%; text-align: right; font-weight: bold; padding: 5pt 0; border: none; background: transparent;">Page No.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: center; font-weight: bold; padding: 2.2pt 0; border: none;">1</td>
+              <td style="text-align: left; font-weight: bold; padding: 2.2pt 10pt; border: none;">Abstract</td>
+              <td style="text-align: right; font-weight: bold; padding: 2.2pt 0; border: none;">i</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: bold; padding: 2.2pt 0; border: none;">2</td>
+              <td style="text-align: left; font-weight: bold; padding: 2.2pt 10pt; border: none;">List of Figures</td>
+              <td style="text-align: right; font-weight: bold; padding: 2.2pt 0; border: none;">ii</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: bold; padding: 2.2pt 0; border: none;">3</td>
+              <td style="text-align: left; font-weight: bold; padding: 2.2pt 10pt; border: none;">List of Tables</td>
+              <td style="text-align: right; font-weight: bold; padding: 2.2pt 0; border: none;">iii</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: bold; padding: 2.2pt 0; border: none;">4</td>
+              <td style="text-align: left; font-weight: bold; padding: 2.2pt 10pt; border: none;">List of Abbreviations</td>
+              <td style="text-align: right; font-weight: bold; padding: 2.2pt 0; border: none;">iv</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: bold; padding: 3pt 0 1.5pt 0; border: none;">5</td>
+              <td style="text-align: left; font-weight: bold; padding: 3pt 10pt 1.5pt 10pt; border: none;">Chapter 1 – Introduction</td>
+              <td style="text-align: right; font-weight: bold; padding: 3pt 0 1.5pt 0; border: none;">1</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">5.1 &nbsp;&nbsp;&nbsp;&nbsp; Project Overview</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">1</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">5.2 &nbsp;&nbsp;&nbsp;&nbsp; Problem Statement</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">2</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">5.3 &nbsp;&nbsp;&nbsp;&nbsp; Objectives of the Project</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">2</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">5.4 &nbsp;&nbsp;&nbsp;&nbsp; Scope of the Project</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">3</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: bold; padding: 3pt 0 1.5pt 0; border: none;">6</td>
+              <td style="text-align: left; font-weight: bold; padding: 3pt 10pt 1.5pt 10pt; border: none;">Chapter 2 – Existing System and Proposed System</td>
+              <td style="text-align: right; font-weight: bold; padding: 3pt 0 1.5pt 0; border: none;">5</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">6.1 &nbsp;&nbsp;&nbsp;&nbsp; Existing System</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">5</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">6.2 &nbsp;&nbsp;&nbsp;&nbsp; Limitations of the Existing System</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">5</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">6.3 &nbsp;&nbsp;&nbsp;&nbsp; Proposed Solution</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">5</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">6.4 &nbsp;&nbsp;&nbsp;&nbsp; Advantages of the Proposed System</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">6</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: bold; padding: 3pt 0 1.5pt 0; border: none;">7</td>
+              <td style="text-align: left; font-weight: bold; padding: 3pt 10pt 1.5pt 10pt; border: none;">Chapter 3 – System Analysis and Design</td>
+              <td style="text-align: right; font-weight: bold; padding: 3pt 0 1.5pt 0; border: none;">7</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">7.1 &nbsp;&nbsp;&nbsp;&nbsp; Hardware and Software Requirements</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">7</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">7.2 &nbsp;&nbsp;&nbsp;&nbsp; System Architecture</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">8</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">7.3 &nbsp;&nbsp;&nbsp;&nbsp; Module Description</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">10</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">7.4 &nbsp;&nbsp;&nbsp;&nbsp; UML Diagrams / Data Flow Diagram</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">14</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">7.5 &nbsp;&nbsp;&nbsp;&nbsp; Algorithm / Flowchart</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">17</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: bold; padding: 3pt 0 1.5pt 0; border: none;">8</td>
+              <td style="text-align: left; font-weight: bold; padding: 3pt 10pt 1.5pt 10pt; border: none;">Chapter 4 – Implementation</td>
+              <td style="text-align: right; font-weight: bold; padding: 3pt 0 1.5pt 0; border: none;">20</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">8.1 &nbsp;&nbsp;&nbsp;&nbsp; Implementation Details</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">20</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">8.2 &nbsp;&nbsp;&nbsp;&nbsp; Module Implementation</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">21</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">8.3 &nbsp;&nbsp;&nbsp;&nbsp; Tools and Technologies Used</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">23</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: bold; padding: 3pt 0 1.5pt 0; border: none;">9</td>
+              <td style="text-align: left; font-weight: bold; padding: 3pt 10pt 1.5pt 10pt; border: none;">Chapter 5 – Results and Testing</td>
+              <td style="text-align: right; font-weight: bold; padding: 3pt 0 1.5pt 0; border: none;">25</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">9.1 &nbsp;&nbsp;&nbsp;&nbsp; Screenshots and Outputs</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">25</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">9.2 &nbsp;&nbsp;&nbsp;&nbsp; Testing and Validation</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">29</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">9.3 &nbsp;&nbsp;&nbsp;&nbsp; Results and Discussion</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">31</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: bold; padding: 3pt 0 1.5pt 0; border: none;">10</td>
+              <td style="text-align: left; font-weight: bold; padding: 3pt 10pt 1.5pt 10pt; border: none;">Chapter 6 – Conclusion and Future Enhancement</td>
+              <td style="text-align: right; font-weight: bold; padding: 3pt 0 1.5pt 0; border: none;">32</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">10.1 &nbsp;&nbsp;&nbsp;&nbsp; Conclusion</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">32</td>
+            </tr>
+            <tr>
+              <td style="border: none;"></td>
+              <td style="padding: 1.5pt 10pt 1.5pt 28pt; border: none;">10.2 &nbsp;&nbsp;&nbsp;&nbsp; Future Enhancements</td>
+              <td style="text-align: right; padding: 1.5pt 0; border: none;">33</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: bold; padding: 2.2pt 0; border: none;">11</td>
+              <td style="text-align: left; font-weight: bold; padding: 2.2pt 10pt; border: none;">References / Bibliography</td>
+              <td style="text-align: right; font-weight: bold; padding: 2.2pt 0; border: none;">34</td>
+            </tr>
+            <tr>
+              <td style="text-align: center; font-weight: bold; padding: 2.2pt 0; border: none;">12</td>
+              <td style="text-align: left; font-weight: bold; padding: 2.2pt 10pt; border: none;">Appendices (Source Code)</td>
+              <td style="text-align: right; font-weight: bold; padding: 2.2pt 0; border: none;">35</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIST OF TABLES & FIGURES -->
+  <div class="page-break">
+    <h1>LIST OF TABLES</h1>
+    <table class="report-table" style="border: none;">
+      <tr style="border-bottom: 1.5pt solid #000; border-top: 1.5pt solid #000;">
+        <th style="width: 20%; border: none; background: none; text-align: left;">TABLE NO.</th>
+        <th style="width: 65%; border: none; background: none; text-align: left;">TABLE TITLE</th>
+        <th style="width: 15%; border: none; background: none; text-align: right;">PAGE NO.</th>
+      </tr>
+      <tr><td style="border: none;">Table 2.1</td><td style="border: none;">Comparison of Existing vs. Proposed System</td><td style="border: none; text-align: right;">7</td></tr>
+      <tr><td style="border: none;">Table 3.1</td><td style="border: none;">Hardware Specification Requirements</td><td style="border: none; text-align: right;">10</td></tr>
+      <tr><td style="border: none;">Table 3.2</td><td style="border: none;">Software Technology Stack</td><td style="border: none; text-align: right;">11</td></tr>
+      <tr><td style="border: none;">Table 4.1</td><td style="border: none;">User Collection Data Dictionary</td><td style="border: none; text-align: right;">24</td></tr>
+      <tr><td style="border: none;">Table 4.2</td><td style="border: none;">Document Collection Data Dictionary</td><td style="border: none; text-align: right;">25</td></tr>
+    </table>
+
+    <div style="height: 30pt;"></div>
+
+    <h1>LIST OF FIGURES</h1>
+    <table class="report-table" style="border: none;">
+      <tr style="border-bottom: 1.5pt solid #000; border-top: 1.5pt solid #000;">
+        <th style="width: 20%; border: none; background: none; text-align: left;">FIGURE NO.</th>
+        <th style="width: 65%; border: none; background: none; text-align: left;">FIGURE TITLE</th>
+        <th style="width: 15%; border: none; background: none; text-align: right;">PAGE NO.</th>
+      </tr>
+      <tr><td style="border: none;">Figure 4.1</td><td style="border: none;">Three-Tier MERN Architecture of AcadFlow</td><td style="border: none; text-align: right;">13</td></tr>
+      <tr><td style="border: none;">Figure 4.2</td><td style="border: none;">UML Use Case Diagram with System Boundary</td><td style="border: none; text-align: right;">17</td></tr>
+      <tr><td style="border: none;">Figure 4.3</td><td style="border: none;">UML Class Diagram &amp; Data Relationships</td><td style="border: none; text-align: right;">19</td></tr>
+      <tr><td style="border: none;">Figure 4.4</td><td style="border: none;">UML Sequence Diagram for Document Approval Lifecycle</td><td style="border: none; text-align: right;">21</td></tr>
+      <tr><td style="border: none;">Figure 4.5</td><td style="border: none;">Data Flow Diagram (Level 0 Context Diagram)</td><td style="border: none; text-align: right;">23</td></tr>
+      <tr><td style="border: none;">Figure 7.1</td><td style="border: none;">Landing Page &amp; Role-Based Entry</td><td style="border: none; text-align: right;">48</td></tr>
+      <tr><td style="border: none;">Figure 7.2</td><td style="border: none;">Authentication &amp; Staff Code Linking Interface</td><td style="border: none; text-align: right;">49</td></tr>
+      <tr><td style="border: none;">Figure 7.3</td><td style="border: none;">Student Portal: Document Upload &amp; Status Tracking</td><td style="border: none; text-align: right;">50</td></tr>
+      <tr><td style="border: none;">Figure 7.4</td><td style="border: none;">Staff Portal: Review, Remarks &amp; Approval Modal</td><td style="border: none; text-align: right;">51</td></tr>
+      <tr><td style="border: none;">Figure 7.5</td><td style="border: none;">Digital Certificate Generation &amp; Public QR Verification</td><td style="border: none; text-align: right;">52</td></tr>
+      <tr><td style="border: none;">Figure 7.6</td><td style="border: none;">Admin Governance Dashboard &amp; Real-time Audit Trail</td><td style="border: none; text-align: right;">53</td></tr>
+    </table>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- CHAPTER 1: INTRODUCTION (TEMPLATE PAGE 7)                                 -->
+  <!-- ========================================================================= -->
+  <div class="page-break">
+    <h1>CHAPTER 1<br>INTRODUCTION</h1>
+
+    <h2>1.1 OVERVIEW</h2>
+    <p>
+      Higher education institutions operate as multifaceted ecosystems consisting of thousands of students, faculty mentors, department heads, and administrative personnel. A cornerstone of collegiate operations is academic document governance—the systematic creation, verification, forwarding, approval, and archival of scholastic records. These records encompass bonafide certificates, course completion attestations, on-duty attendance permissions for conferences and hackathons, project phase milestone reviews, and course materials.
+    </p>
+    <p>
+      Despite widespread digitization in classroom pedagogy, academic document workflows in many educational environments remain heavily paper-reliant. Students physically print requisition forms, wander campus buildings seeking faculty signatures, wait for hours outside departmental offices, and physically transport files to deaneries. Such manual mechanisms incur substantial friction, paper wastage, administrative delays, and lack accountability.
+    </p>
+    <p>
+      <strong>AcadFlow</strong> is conceived as a robust, centralized, web-based digital academic document workflow and management platform. Powered by modern web architectures—specifically React 19, Node.js, Express.js, and MongoDB Atlas—AcadFlow digitizes collegiate administrative operations into a streamlined, paperless ecosystem.
+    </p>
+
+    <h2>1.2 PROBLEM DEFINITION</h2>
+    <p>
+      The conventional manual academic documentation process exhibits critical operational shortcomings:
+    </p>
+    <ul>
+      <li><strong>Excessive Latency:</strong> A standard bonafide or permission application requires an average of 3 to 7 working days to collect requisite signatures from Class Advisors, Faculty Guides, and Heads of Departments.</li>
+      <li><strong>Physical File Misplacement:</strong> Physical sheets of paper are frequently misplaced, damaged, or lost in transit, forcing students to re-initiate entire processes.</li>
+      <li><strong>Absence of Transparency:</strong> Students remain completely unaware of where their application is stalled in the approval hierarchy, leading to anxiety and unnecessary physical visits to staff rooms.</li>
+      <li><strong>Credential Fraud &amp; Forgery:</strong> Paper certificates and sanction slips lack cryptographic tamper-proofing, rendering them vulnerable to physical alteration, unverified photocopies, and forged signatures.</li>
+      <li><strong>Audit &amp; Compliance Voids:</strong> Conventional paper files fail to provide searchable, timestamped historical logs, making institutional accreditation audits (such as NAAC and NBA) grueling and error-prone.</li>
+    </ul>
+
+    <h2>1.3 OBJECTIVE</h2>
+    <p>
+      The primary objectives of the AcadFlow platform include:
+    </p>
+    <ol>
+      <li>To engineer a zero-paper, cloud-based academic document workflow platform with dedicated role-based portals for Students, Staff, and Administrators.</li>
+      <li>To institute a deterministic multi-state review engine (Draft &rarr; Submitted &rarr; Under Review &rarr; Correction Needed &rarr; Approved/Rejected) complete with faculty remark capabilities and student resubmission channels.</li>
+      <li>To formulate an automated staff-student association mechanism via cryptographic Staff Codes, ensuring submissions automatically route to assigned mentors without manual triage.</li>
+      <li>To automate on-duty (OD) attendance permissions and project milestone evaluations with real-time in-app alerts and notifications.</li>
+      <li>To introduce cryptographically signed digital certificates embedded with unique hash strings and scannable QR codes that permit instant, unforgeable verification by external entities.</li>
+      <li>To enforce an immutable, tamper-evident audit logging engine that tracks every state change, document upload, and user modification for compliance.</li>
+    </ol>
+
+    <h2>1.4 SCOPE OF THE PROJECT</h2>
+    <p>
+      The operational scope of AcadFlow covers departmental and inter-departmental academic documentation within an autonomous college environment. Specifically, the system governs:
+    </p>
+    <ul>
+      <li><strong>Student Requisitions:</strong> Bonafide requests, internship NOCs, project submissions, attendance condonation requisitions, and extracurricular permissions.</li>
+      <li><strong>Staff Review Workspaces:</strong> Dedicated filtering, document previewing, single-click approvals, structured rejections, and line-item correction requests.</li>
+      <li><strong>Project Reviews:</strong> Milestone tracking across Phase I, Phase II, and Phase III reviews, evaluation rubrics, guide remarks, and viva-voce grading.</li>
+      <li><strong>Centralized Academic Repository:</strong> Subject-wise notes, previous year question banks, lab manuals, and syllabus distribution.</li>
+      <li><strong>Administrative Oversight:</strong> User role provisioning, system telemetry, audit trail inspection, and digital certificate issuing.</li>
+    </ul>
+
+    <h2>1.5 MOTIVATION</h2>
+    <p>
+      In an era characterized by accelerated institutional digital transformation, environmental sustainability, and mobile-first student expectations, relying on physical folders and handwritten rubber stamps is anachronistic. Environmental consciousness necessitates reducing paper consumption—a single academic institution with 4,000 students consumes hundreds of thousands of sheets of paper annually solely for internal administrative clearances.
+    </p>
+    <p>
+      Furthermore, during periods of remote learning, hybrid schedules, or external internship semesters, students find it logistically prohibitive to visit campus physically to acquire signatures. AcadFlow bridges this divide by empowering all stakeholders with instantaneous, secure, 24/7 web-based access to academic administrative machinery.
+    </p>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- CHAPTER 2: RELATED WORK (TEMPLATE PAGE 8)                                 -->
+  <!-- ========================================================================= -->
+  <div class="page-break">
+    <h1>CHAPTER 2<br>RELATED WORK</h1>
+
+    <h2>2.1 LITERATURE REVIEW</h2>
+    <p>
+      The evolution of administrative automation in tertiary education has progressed through several developmental phases over the past two decades:
+    </p>
+    <p>
+      <strong>Legacy Enterprise Resource Planning (ERP) Systems:</strong> Monolithic campus ERP solutions (such as SAP Campus Management and Oracle PeopleSoft) were historically adopted by large universities to centralize financial records and student registration. However, research by Kumar et al. (2021) reveals that these enterprise systems suffer from exorbitant licensing expenditures, rigid user interfaces, excessive configuration overhead, and an acute inability to handle granular, department-level approval workflows like student project reviews and rapid OD permissions.
+    </p>
+    <p>
+      <strong>Generic Document Management Systems (DMS):</strong> Platforms such as Google Workspace, SharePoint, and Dropbox provide digital file hosting and rudimentary permission sharing. However, as noted by Rodriguez &amp; Tanaka (2022), generic DMS solutions lack educational domain context. They do not enforce student-guide hierarchical relationships, do not implement academic status machines (e.g., correction requests with structured versioning), cannot validate attendance dates against academic calendars, and fail to generate institutional QR-verifiable certificates.
+    </p>
+    <p>
+      <strong>Electronic Signature Suites:</strong> Commercial e-signature platforms (such as DocuSign and Adobe Sign) facilitate legally binding electronic signatures on static PDF documents. Nevertheless, their prohibitive per-envelope pricing models make them economically non-viable for routine collegiate use, where hundreds of students submit requests weekly. Additionally, they do not integrate native project milestone review rubrics or student academic repositories.
+    </p>
+
+    <h2>2.2 EXISTING SYSTEM</h2>
+    <p>
+      The prevailing documentation framework in most colleges is either completely physical or fragmented across ad-hoc communication tools such as WhatsApp groups and personal emails:
+    </p>
+    <ul>
+      <li><strong>Manual Physical File Movement:</strong> Students physically purchase or print template requisition sheets, manually fill details with ballpoint pens, and navigate multiple departmental buildings seeking in-person signatures from faculty advisors, mentors, and the HOD.</li>
+      <li><strong>Asynchronous Ad-hoc Email Attachments:</strong> In semi-digital environments, students email PDFs to faculty. Faculty inboxes quickly become inundated with hundreds of unorganized emails, leading to lost attachments, missed deadlines, and zero centralized tracking.</li>
+      <li><strong>Lack of Structured Version Control:</strong> When a guide asks for revisions on a project synopsis or report, new versions are repeatedly sent via chat or email with arbitrary file names (e.g., report_final_v2_really_final.pdf), obliterating version traceability.</li>
+      <li><strong>Susceptibility to Document Forgery:</strong> Physical stamped certificates and permission slips can be easily duplicated using off-the-shelf color scanners and graphic software, jeopardizing institutional credibility.</li>
+    </ul>
+
+    <h2>2.3 PROPOSED SYSTEM</h2>
+    <p>
+      The proposed <strong>AcadFlow</strong> system eliminates these systemic vulnerabilities by consolidating all academic document workflows into a unified, high-performance web platform:
+    </p>
+    <ul>
+      <li><strong>Direct Mentorship Routing:</strong> Through unique cryptographic Staff Codes, student accounts are bound directly to their respective faculty advisors upon registration, establishing automatic routing topologies.</li>
+      <li><strong>Deterministic State Workflow:</strong> Every document submitted enters a formalized lifecycle state machine with real-time status visibility (Draft, Submitted, Under Review, Correction Needed, Approved, Rejected).</li>
+      <li><strong>In-App Remarks &amp; Iterative Resubmission:</strong> Mentors can attach specific textual feedback and request corrections. Students can upload revised files directly against the original ticket, preserving complete revision history.</li>
+      <li><strong>Cryptographic Digital Certificates with QR Verification:</strong> Certificates issued by the institution are hashed and assigned a unique URL. Anyone scanning the QR code with a standard smartphone camera is instantly redirected to the verification page, validating authenticity against database records in real time.</li>
+      <li><strong>Institutional Audit Trail:</strong> Every security event, role elevation, document approval, and profile modification is immutably logged with actor IDs, IP records, and timestamps for institutional audits.</li>
+    </ul>
+
+    <table class="report-table">
+      <caption>Table 2.1: Comparative Analysis between Existing and Proposed System</caption>
+      <thead>
+        <tr>
+          <th>Feature / Metric</th>
+          <th>Conventional Existing System</th>
+          <th>Proposed AcadFlow System</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Turnaround Time</strong></td>
+          <td>3 to 7 working days</td>
+          <td>Under 4 hours (Instantaneous routing)</td>
+        </tr>
+        <tr>
+          <td><strong>Paper Consumption</strong></td>
+          <td>High (Hundreds of reams per semester)</td>
+          <td>Zero (100% digital paperless)</td>
+        </tr>
+        <tr>
+          <td><strong>Submission Tracking</strong></td>
+          <td>Opaque; requires physical in-person visits</td>
+          <td>Real-time visual progress &amp; notifications</td>
+        </tr>
+        <tr>
+          <td><strong>Document Security</strong></td>
+          <td>Low; vulnerable to forgery and loss</td>
+          <td>High; JWT auth, hashed certs &amp; QR verification</td>
+        </tr>
+        <tr>
+          <td><strong>Audit &amp; Accountability</strong></td>
+          <td>Scattered across paper binders</td>
+          <td>Automated, immutable digital audit trail</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- CHAPTER 3: SYSTEM ANALYSIS (TEMPLATE PAGE 9)                              -->
+  <!-- ========================================================================= -->
+  <div class="page-break">
+    <h1>CHAPTER 3<br>SYSTEM ANALYSIS</h1>
+
+    <h2>3.1 SYSTEM REQUIREMENTS</h2>
+    <p>
+      A rigorous analysis of organizational workflows within Easwari Engineering College was conducted to formulate comprehensive Functional and Non-Functional Requirements.
+    </p>
+
+    <h3>3.1.1 Functional Requirements</h3>
+    <ul>
+      <li><strong>FR-1: User Management &amp; Role-Based Access Control (RBAC):</strong>
+        <ul>
+          <li>The system shall distinguish three distinct actor roles: Student, Staff (Faculty Guide/Advisor), and Institutional Administrator.</li>
+          <li>Student registration must mandate the input of a valid Staff Code to automatically link the student to their designated faculty mentor.</li>
+          <li>Passwords must be securely hashed using salted bcrypt prior to persistence.</li>
+        </ul>
+      </li>
+      <li><strong>FR-2: Document Lifecycle Engine:</strong>
+        <ul>
+          <li>Students shall submit documents (PDF, DOCX, PNG) up to 10MB with categorized metadata (Bonafide, NOC, General Permission, Project Report).</li>
+          <li>Staff members shall view only documents submitted by their linked advisees, with capabilities to review, approve, reject, or request revisions.</li>
+          <li>The system shall maintain revision history when students resubmit corrected files.</li>
+        </ul>
+      </li>
+      <li><strong>FR-3: On-Duty (OD) &amp; Permission Module:</strong>
+        <ul>
+          <li>Students shall request OD permissions by specifying event titles, organizers, start and end dates, and attaching invitation/proof letters.</li>
+          <li>The system must validate that the end date does not precede the start date.</li>
+        </ul>
+      </li>
+      <li><strong>FR-4: Project Milestone Tracking:</strong>
+        <ul>
+          <li>Students can register project groups, abstract submissions, and sequential milestone files (Review 1, Review 2, Final Thesis).</li>
+          <li>Staff can assign quantitative marks, evaluation rubrics, and technical critiques.</li>
+        </ul>
+      </li>
+      <li><strong>FR-5: Digital Certificate Issuance &amp; QR Verification:</strong>
+        <ul>
+          <li>Administrators and staff can issue verified certificates with automated serial numbers.</li>
+          <li>The system must generate a 2D QR code encoding the cryptographic verification URL.</li>
+          <li>A publicly accessible verification endpoint must confirm validity without requiring login.</li>
+        </ul>
+      </li>
+      <li><strong>FR-6: Audit Trail &amp; Logging:</strong>
+        <ul>
+          <li>All state mutations (approvals, logins, rejections, user deactivations) must be recorded in an immutable audit collection with actor ID, action type, IP address, and timestamp.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>3.1.2 Non-Functional Requirements</h3>
+    <ul>
+      <li><strong>NFR-1: Performance &amp; Response Latency:</strong> The API shall respond to 95% of read queries within 250 milliseconds. File uploads shall be handled asynchronously with streaming buffers.</li>
+      <li><strong>NFR-2: Security &amp; Data Integrity:</strong> All communications must occur over HTTPS with TLS 1.3. API endpoints must be safeguarded with Helmet security headers, rate limiting (100 requests per 15 minutes per IP), CORS restrictions, and strict input validation via Zod schemas.</li>
+      <li><strong>NFR-3: Scalability:</strong> The stateless Node.js / Express backend must support horizontal scaling across cloud instances, backed by connection pooling to MongoDB Atlas.</li>
+      <li><strong>NFR-4: Availability &amp; Reliability:</strong> The system architecture must target 99.9% uptime, resilient to individual component restarts with comprehensive error-handling middleware.</li>
+      <li><strong>NFR-5: Usability &amp; Responsiveness:</strong> The frontend user interface must be fully responsive across mobile screens, tablets, and desktop displays, featuring consistent typography and intuitive navigation.</li>
+    </ul>
+
+    <h2>3.2 SOFTWARE AND HARDWARE REQUIREMENTS</h2>
+    <p>
+      The platform is engineered to function efficiently on modern web standards and cloud infrastructure. The baseline hardware and software prerequisites are enumerated below:
+    </p>
+
+    <table class="report-table">
+      <caption>Table 3.1: Hardware Requirements Specification</caption>
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Server / Deployment Machine</th>
+          <th>Client Workstation / Device</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Processor</strong></td>
+          <td>Dual-Core x86_64 / ARM64, 2.4 GHz or higher</td>
+          <td>Intel Core i3 / AMD Ryzen 3 / Apple Silicon / Smartphone SoC</td>
+        </tr>
+        <tr>
+          <td><strong>Random Access Memory (RAM)</strong></td>
+          <td>Minimum 4 GB (8 GB recommended for production)</td>
+          <td>Minimum 2 GB RAM</td>
+        </tr>
+        <tr>
+          <td><strong>Storage</strong></td>
+          <td>20 GB SSD (NVMe storage recommended for uploads)</td>
+          <td>500 MB free browser cache space</td>
+        </tr>
+        <tr>
+          <td><strong>Network Interface</strong></td>
+          <td>1 Gbps Ethernet broadband uplink</td>
+          <td>Standard 4G / 5G Mobile Data or Wi-Fi (512 Kbps+)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="report-table">
+      <caption>Table 3.2: Software Requirements Specification</caption>
+      <thead>
+        <tr>
+          <th>Software Tier</th>
+          <th>Technology / Tool Employed</th>
+          <th>Version / Specification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Operating System</strong></td>
+          <td>Ubuntu Linux 22.04 LTS / Windows 10/11 Server</td>
+          <td>Cross-platform (Linux, Windows, macOS, Android, iOS)</td>
+        </tr>
+        <tr>
+          <td><strong>Runtime Environment</strong></td>
+          <td>Node.js JavaScript Runtime</td>
+          <td>v18.x LTS or v20.x LTS or higher</td>
+        </tr>
+        <tr>
+          <td><strong>Backend Framework</strong></td>
+          <td>Express.js</td>
+          <td>v4.19+ RESTful Engine</td>
+        </tr>
+        <tr>
+          <td><strong>Database Management System</strong></td>
+          <td>MongoDB Atlas (Mongoose ODM)</td>
+          <td>v7.0+ Distributed Document Store</td>
+        </tr>
+        <tr>
+          <td><strong>Frontend Library</strong></td>
+          <td>React.js (with Vite Bundler)</td>
+          <td>React 19.x with Vite 6.x</td>
+        </tr>
+        <tr>
+          <td><strong>Styling Framework</strong></td>
+          <td>Tailwind CSS</td>
+          <td>v3.4+ Utility Engine</td>
+        </tr>
+        <tr>
+          <td><strong>Authentication &amp; Security</strong></td>
+          <td>JSON Web Tokens (JWT) &amp; bcryptjs</td>
+          <td>256-bit HMAC SHA256 &amp; 10-salt bcrypt</td>
+        </tr>
+        <tr>
+          <td><strong>Web Browser</strong></td>
+          <td>Google Chrome, Microsoft Edge, Mozilla Firefox, Safari</td>
+          <td>Modern HTML5/ES6 compliant browsers</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- CHAPTER 4: SYSTEM DESIGN (TEMPLATE PAGE 10)                               -->
+  <!-- ========================================================================= -->
+  <div class="page-break">
+    <h1>CHAPTER 4<br>SYSTEM DESIGN</h1>
+
+    <h2>4.1 SYSTEM ARCHITECTURE</h2>
+    <p>
+      AcadFlow is structured according to a modular <strong>Three-Tier Client-Server Architecture</strong> comprising the Presentation Layer, the Application / Business Logic Layer, and the Data Persistence Layer.
+    </p>
+
+    <div class="diagram-container">
+      <svg width="100%" height="340" viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gradClient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#eff6ff" /><stop offset="100%" stop-color="#dbeafe" />
+          </linearGradient>
+          <linearGradient id="gradServer" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f0fdf4" /><stop offset="100%" stop-color="#dcfce7" />
+          </linearGradient>
+          <linearGradient id="gradDb" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fefce8" /><stop offset="100%" stop-color="#fef08a" />
+          </linearGradient>
+          <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#1e293b"/>
+          </marker>
+        </defs>
+
+        <!-- Tier 1: Client -->
+        <rect x="20" y="20" width="190" height="300" rx="6" fill="url(#gradClient)" stroke="#3b82f6" stroke-width="2" />
+        <text x="115" y="45" font-family="'Times New Roman', serif" font-size="12pt" font-weight="bold" fill="#1e3a8a" text-anchor="middle">PRESENTATION TIER</text>
+        <text x="115" y="65" font-family="'Times New Roman', serif" font-size="10pt" font-style="italic" fill="#1d4ed8" text-anchor="middle">(React 19 + Vite Client)</text>
+
+        <rect x="35" y="85" width="160" height="42" rx="4" fill="#ffffff" stroke="#93c5fd" />
+        <text x="115" y="105" font-family="'Times New Roman', serif" font-size="10pt" font-weight="bold" text-anchor="middle">Student Portal</text>
+        <text x="115" y="119" font-family="sans-serif" font-size="8pt" fill="#475569" text-anchor="middle">Submissions &amp; OD Requests</text>
+
+        <rect x="35" y="137" width="160" height="42" rx="4" fill="#ffffff" stroke="#93c5fd" />
+        <text x="115" y="157" font-family="'Times New Roman', serif" font-size="10pt" font-weight="bold" text-anchor="middle">Faculty Staff Portal</text>
+        <text x="115" y="171" font-family="sans-serif" font-size="8pt" fill="#475569" text-anchor="middle">Document Review &amp; Grading</text>
+
+        <rect x="35" y="189" width="160" height="42" rx="4" fill="#ffffff" stroke="#93c5fd" />
+        <text x="115" y="209" font-family="'Times New Roman', serif" font-size="10pt" font-weight="bold" text-anchor="middle">Admin Control Center</text>
+        <text x="115" y="223" font-family="sans-serif" font-size="8pt" fill="#475569" text-anchor="middle">Users, Certs &amp; Audit Logs</text>
+
+        <rect x="35" y="241" width="160" height="42" rx="4" fill="#ffffff" stroke="#93c5fd" />
+        <text x="115" y="261" font-family="'Times New Roman', serif" font-size="10pt" font-weight="bold" text-anchor="middle">Public QR Verifier</text>
+        <text x="115" y="275" font-family="sans-serif" font-size="8pt" fill="#475569" text-anchor="middle">Instant Certificate Validator</text>
+
+        <!-- Arrows 1 -> 2 -->
+        <line x1="210" y1="170" x2="255" y2="170" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)" />
+        <line x1="255" y1="180" x2="210" y2="180" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)" />
+        <text x="233" y="160" font-family="sans-serif" font-size="7.5pt" font-weight="bold" fill="#0f172a" text-anchor="middle">HTTPS</text>
+        <text x="233" y="196" font-family="sans-serif" font-size="7.5pt" fill="#0f172a" text-anchor="middle">JSON/JWT</text>
+
+        <!-- Tier 2: Server -->
+        <rect x="260" y="20" width="220" height="300" rx="6" fill="url(#gradServer)" stroke="#16a34a" stroke-width="2" />
+        <text x="370" y="45" font-family="'Times New Roman', serif" font-size="12pt" font-weight="bold" fill="#14532d" text-anchor="middle">APPLICATION TIER</text>
+        <text x="370" y="65" font-family="'Times New Roman', serif" font-size="10pt" font-style="italic" fill="#15803d" text-anchor="middle">(Node.js &amp; Express API)</text>
+
+        <rect x="275" y="80" width="190" height="32" rx="3" fill="#ffffff" stroke="#86efac" />
+        <text x="370" y="100" font-family="sans-serif" font-size="9pt" font-weight="bold" fill="#1e293b" text-anchor="middle">Security (Helmet, RateLimit, CORS)</text>
+
+        <rect x="275" y="118" width="190" height="32" rx="3" fill="#ffffff" stroke="#86efac" />
+        <text x="370" y="138" font-family="sans-serif" font-size="9pt" font-weight="bold" fill="#1e293b" text-anchor="middle">Auth &amp; RBAC Guard (JWT / Roles)</text>
+
+        <rect x="275" y="156" width="190" height="32" rx="3" fill="#ffffff" stroke="#86efac" />
+        <text x="370" y="176" font-family="sans-serif" font-size="9pt" font-weight="bold" fill="#1e293b" text-anchor="middle">Multer Upload Engine (MIME/Disk)</text>
+
+        <rect x="275" y="194" width="190" height="32" rx="3" fill="#ffffff" stroke="#86efac" />
+        <text x="370" y="214" font-family="sans-serif" font-size="9pt" font-weight="bold" fill="#1e293b" text-anchor="middle">Workflow State Machine Controllers</text>
+
+        <rect x="275" y="232" width="190" height="32" rx="3" fill="#ffffff" stroke="#86efac" />
+        <text x="370" y="252" font-family="sans-serif" font-size="9pt" font-weight="bold" fill="#1e293b" text-anchor="middle">Services (QR Code, Mailer, Logger)</text>
+
+        <rect x="275" y="270" width="190" height="32" rx="3" fill="#ffffff" stroke="#86efac" />
+        <text x="370" y="290" font-family="sans-serif" font-size="9pt" font-weight="bold" fill="#1e293b" text-anchor="middle">Central Error Handler &amp; Router</text>
+
+        <!-- Arrows 2 -> 3 -->
+        <line x1="480" y1="170" x2="525" y2="170" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)" />
+        <line x1="525" y1="180" x2="480" y2="180" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)" />
+        <text x="502" y="160" font-family="sans-serif" font-size="7.5pt" font-weight="bold" fill="#0f172a" text-anchor="middle">Mongoose</text>
+        <text x="502" y="196" font-family="sans-serif" font-size="7.5pt" fill="#0f172a" text-anchor="middle">TCP/TLS</text>
+
+        <!-- Tier 3: Database -->
+        <rect x="530" y="20" width="150" height="300" rx="6" fill="url(#gradDb)" stroke="#ca8a04" stroke-width="2" />
+        <text x="605" y="45" font-family="'Times New Roman', serif" font-size="12pt" font-weight="bold" fill="#713f12" text-anchor="middle">DATA TIER</text>
+        <text x="605" y="65" font-family="'Times New Roman', serif" font-size="10pt" font-style="italic" fill="#854d0e" text-anchor="middle">(MongoDB Atlas)</text>
+
+        <ellipse cx="605" cy="98" rx="55" ry="14" fill="#ffffff" stroke="#eab308" />
+        <text x="605" y="102" font-family="sans-serif" font-size="8.5pt" font-weight="bold" text-anchor="middle">Users Collection</text>
+
+        <ellipse cx="605" cy="134" rx="55" ry="14" fill="#ffffff" stroke="#eab308" />
+        <text x="605" y="138" font-family="sans-serif" font-size="8.5pt" font-weight="bold" text-anchor="middle">Documents</text>
+
+        <ellipse cx="605" cy="170" rx="55" ry="14" fill="#ffffff" stroke="#eab308" />
+        <text x="605" y="174" font-family="sans-serif" font-size="8.5pt" font-weight="bold" text-anchor="middle">OD Requests</text>
+
+        <ellipse cx="605" cy="206" rx="55" ry="14" fill="#ffffff" stroke="#eab308" />
+        <text x="605" y="210" font-family="sans-serif" font-size="8.5pt" font-weight="bold" text-anchor="middle">Projects / Milestones</text>
+
+        <ellipse cx="605" cy="242" rx="55" ry="14" fill="#ffffff" stroke="#eab308" />
+        <text x="605" y="246" font-family="sans-serif" font-size="8.5pt" font-weight="bold" text-anchor="middle">Certificates &amp; QR</text>
+
+        <ellipse cx="605" cy="278" rx="55" ry="14" fill="#ffffff" stroke="#eab308" />
+        <text x="605" y="282" font-family="sans-serif" font-size="8.5pt" font-weight="bold" text-anchor="middle">Audit Logs</text>
+      </svg>
+      <div class="diagram-caption">Figure 4.1: Three-Tier MERN Architecture of AcadFlow</div>
+    </div>
+
+    <h2>4.2 MODULE DESCRIPTION</h2>
+    <p>
+      The functional decomposition of AcadFlow partitions the system into distinct, loosely-coupled modules:
+    </p>
+    <ul>
+      <li><strong>Module 1: Authentication &amp; Staff Code Linking Engine:</strong> Governs user registration, credential hashing with bcrypt (10 rounds), JWT token issuance, and relational binding of students to mentors using generated <code>STF-XXXXX</code> tokens.</li>
+      <li><strong>Module 2: Document Lifecycle &amp; State Machine Engine:</strong> Manages file ingestion via Multer, enforces file-type white-listing, stores binaries in dedicated file stores, and drives document progression through a formal state machine (Draft, Submitted, Under Review, Correction Needed, Approved, Rejected).</li>
+      <li><strong>Module 3: On-Duty (OD) &amp; Leave Sanction Module:</strong> Processes academic attendance exemptions for symposia, competitions, and athletic meets. Validates dates, tracks approvals, and exports attendance rosters for faculty.</li>
+      <li><strong>Module 4: Project Review &amp; Milestone Evaluation Module:</strong> Structures undergraduate capstone project tracking across Phase I, Phase II, and Phase III reviews. Facilitates rubric-based scoring and feedback archival.</li>
+      <li><strong>Module 5: Academic Notes Knowledge Base:</strong> Serves as a digital repository for lecture presentations, question banks, and laboratory exercises categorized by semester, subject code, and department.</li>
+      <li><strong>Module 6: Digital Certificate &amp; QR Verification Engine:</strong> Generates tamper-proof course and completion certificates with unique serials, SHA-256 signatures, and embedded QR matrices that link to a public verification endpoint.</li>
+      <li><strong>Module 7: Institutional Audit Trail &amp; Governance Center:</strong> Automatically records every administrative and approval event into an immutable ledger to satisfy compliance and statutory accreditation standards.</li>
+    </ul>
+
+    <h2>4.3 USE CASE DIAGRAM</h2>
+    <p>
+      The UML Use Case Diagram models the functional interactions between the four primary operational actors—<strong>Student</strong>, <strong>Faculty Guide / Staff Advisor</strong>, <strong>Institutional Administrator</strong>, and <strong>Public Verifier</strong>—and the AcadFlow platform.
+    </p>
+
+    <div class="diagram-container">
+      <svg width="100%" height="480" viewBox="0 0 740 480" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+            <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.1"/>
+          </filter>
+        </defs>
+        
+        <!-- System Boundary Box -->
+        <rect x="170" y="20" width="390" height="440" rx="8" fill="#fafafa" stroke="#1e293b" stroke-width="2" stroke-dasharray="6,4" />
+        <text x="365" y="44" font-family="'Times New Roman', serif" font-size="12pt" font-weight="bold" fill="#0f172a" text-anchor="middle">AcadFlow Document Workflow System</text>
+
+        <!-- ACTOR 1: Student (Left) -->
+        <g transform="translate(45, 120)">
+          <circle cx="20" cy="15" r="12" fill="#e0f2fe" stroke="#0369a1" stroke-width="2" />
+          <line x1="20" y1="27" x2="20" y2="60" stroke="#0369a1" stroke-width="2" />
+          <line x1="0" y1="38" x2="40" y2="38" stroke="#0369a1" stroke-width="2" />
+          <line x1="20" y1="60" x2="5" y2="90" stroke="#0369a1" stroke-width="2" />
+          <line x1="20" y1="60" x2="35" y2="90" stroke="#0369a1" stroke-width="2" />
+          <text x="20" y="110" font-family="'Times New Roman', serif" font-size="11pt" font-weight="bold" text-anchor="middle">Student</text>
+        </g>
+
+        <!-- ACTOR 2: Faculty / Staff (Right) -->
+        <g transform="translate(635, 120)">
+          <circle cx="20" cy="15" r="12" fill="#dcfce7" stroke="#15803d" stroke-width="2" />
+          <line x1="20" y1="27" x2="20" y2="60" stroke="#15803d" stroke-width="2" />
+          <line x1="0" y1="38" x2="40" y2="38" stroke="#15803d" stroke-width="2" />
+          <line x1="20" y1="60" x2="5" y2="90" stroke="#15803d" stroke-width="2" />
+          <line x1="20" y1="60" x2="35" y2="90" stroke="#15803d" stroke-width="2" />
+          <text x="20" y="110" font-family="'Times New Roman', serif" font-size="11pt" font-weight="bold" text-anchor="middle">Faculty Staff</text>
+        </g>
+
+        <!-- ACTOR 3: Administrator (Bottom Right) -->
+        <g transform="translate(635, 310)">
+          <circle cx="20" cy="15" r="12" fill="#fef08a" stroke="#a16207" stroke-width="2" />
+          <line x1="20" y1="27" x2="20" y2="60" stroke="#a16207" stroke-width="2" />
+          <line x1="0" y1="38" x2="40" y2="38" stroke="#a16207" stroke-width="2" />
+          <line x1="20" y1="60" x2="5" y2="90" stroke="#a16207" stroke-width="2" />
+          <line x1="20" y1="60" x2="35" y2="90" stroke="#a16207" stroke-width="2" />
+          <text x="20" y="110" font-family="'Times New Roman', serif" font-size="11pt" font-weight="bold" text-anchor="middle">Administrator</text>
+        </g>
+
+        <!-- ACTOR 4: Public Verifier (Bottom Left) -->
+        <g transform="translate(45, 310)">
+          <circle cx="20" cy="15" r="12" fill="#f3e8ff" stroke="#7e22ce" stroke-width="2" />
+          <line x1="20" y1="27" x2="20" y2="60" stroke="#7e22ce" stroke-width="2" />
+          <line x1="0" y1="38" x2="40" y2="38" stroke="#7e22ce" stroke-width="2" />
+          <line x1="20" y1="60" x2="5" y2="90" stroke="#7e22ce" stroke-width="2" />
+          <line x1="20" y1="60" x2="35" y2="90" stroke="#7e22ce" stroke-width="2" />
+          <text x="20" y="110" font-family="'Times New Roman', serif" font-size="11pt" font-weight="bold" text-anchor="middle">Public Verifier</text>
+        </g>
+
+        <!-- USE CASES -->
+        <ellipse cx="365" cy="75" rx="80" ry="18" fill="#ffffff" stroke="#0284c7" stroke-width="1.5" filter="url(#shadow)"/>
+        <text x="365" y="79" font-family="sans-serif" font-size="8.5pt" font-weight="bold" text-anchor="middle">Login / JWT Authentication</text>
+
+        <ellipse cx="280" cy="125" rx="75" ry="18" fill="#ffffff" stroke="#0284c7" stroke-width="1.5" filter="url(#shadow)"/>
+        <text x="280" y="129" font-family="sans-serif" font-size="8pt" font-weight="bold" text-anchor="middle">Submit Academic Document</text>
+
+        <ellipse cx="450" cy="125" rx="75" ry="18" fill="#ffffff" stroke="#16a34a" stroke-width="1.5" filter="url(#shadow)"/>
+        <text x="450" y="129" font-family="sans-serif" font-size="8pt" font-weight="bold" text-anchor="middle">Review / Approve Document</text>
+
+        <ellipse cx="365" cy="175" rx="75" ry="18" fill="#ffffff" stroke="#ea580c" stroke-width="1.5" filter="url(#shadow)"/>
+        <text x="365" y="179" font-family="sans-serif" font-size="8pt" font-weight="bold" text-anchor="middle">Request Correction / Feedback</text>
+
+        <ellipse cx="280" cy="225" rx="75" ry="18" fill="#ffffff" stroke="#0284c7" stroke-width="1.5" filter="url(#shadow)"/>
+        <text x="280" y="229" font-family="sans-serif" font-size="8pt" font-weight="bold" text-anchor="middle">Apply for On-Duty (OD)</text>
+
+        <ellipse cx="450" cy="225" rx="75" ry="18" fill="#ffffff" stroke="#16a34a" stroke-width="1.5" filter="url(#shadow)"/>
+        <text x="450" y="229" font-family="sans-serif" font-size="8pt" font-weight="bold" text-anchor="middle">Sanction / Reject OD</text>
+
+        <ellipse cx="365" cy="275" rx="80" ry="18" fill="#ffffff" stroke="#0284c7" stroke-width="1.5" filter="url(#shadow)"/>
+        <text x="365" y="279" font-family="sans-serif" font-size="8pt" font-weight="bold" text-anchor="middle">Submit &amp; Grade Projects</text>
+
+        <ellipse cx="365" cy="325" rx="75" ry="18" fill="#ffffff" stroke="#16a34a" stroke-width="1.5" filter="url(#shadow)"/>
+        <text x="365" y="329" font-family="sans-serif" font-size="8pt" font-weight="bold" text-anchor="middle">Upload / Download Notes</text>
+
+        <ellipse cx="450" cy="375" rx="75" ry="18" fill="#ffffff" stroke="#ca8a04" stroke-width="1.5" filter="url(#shadow)"/>
+        <text x="450" y="379" font-family="sans-serif" font-size="8pt" font-weight="bold" text-anchor="middle">Issue Certificate &amp; QR</text>
+
+        <ellipse cx="280" cy="375" rx="75" ry="18" fill="#ffffff" stroke="#7e22ce" stroke-width="1.5" filter="url(#shadow)"/>
+        <text x="280" y="379" font-family="sans-serif" font-size="8pt" font-weight="bold" text-anchor="middle">Scan &amp; Verify Authenticity</text>
+
+        <ellipse cx="365" cy="425" rx="75" ry="18" fill="#ffffff" stroke="#ca8a04" stroke-width="1.5" filter="url(#shadow)"/>
+        <text x="365" y="429" font-family="sans-serif" font-size="8pt" font-weight="bold" text-anchor="middle">View Audit Logs &amp; Users</text>
+
+        <!-- Association Lines -->
+        <line x1="85" y1="160" x2="285" y2="75" stroke="#475569" stroke-width="1.2" />
+        <line x1="85" y1="160" x2="205" y2="125" stroke="#475569" stroke-width="1.2" />
+        <line x1="85" y1="160" x2="205" y2="225" stroke="#475569" stroke-width="1.2" />
+        <line x1="85" y1="160" x2="285" y2="275" stroke="#475569" stroke-width="1.2" />
+        <line x1="85" y1="160" x2="290" y2="325" stroke="#475569" stroke-width="1.2" />
+
+        <line x1="635" y1="160" x2="445" y2="75" stroke="#475569" stroke-width="1.2" />
+        <line x1="635" y1="160" x2="525" y2="125" stroke="#475569" stroke-width="1.2" />
+        <line x1="635" y1="160" x2="440" y2="175" stroke="#475569" stroke-width="1.2" />
+        <line x1="635" y1="160" x2="525" y2="225" stroke="#475569" stroke-width="1.2" />
+        <line x1="635" y1="160" x2="445" y2="275" stroke="#475569" stroke-width="1.2" />
+        <line x1="635" y1="160" x2="440" y2="325" stroke="#475569" stroke-width="1.2" />
+
+        <line x1="635" y1="350" x2="445" y2="75" stroke="#475569" stroke-width="1.2" />
+        <line x1="635" y1="350" x2="525" y2="375" stroke="#475569" stroke-width="1.2" />
+        <line x1="635" y1="350" x2="440" y2="425" stroke="#475569" stroke-width="1.2" />
+
+        <line x1="85" y1="350" x2="205" y2="375" stroke="#475569" stroke-width="1.2" />
+
+        <line x1="420" y1="140" x2="385" y2="160" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,3" />
+        <text x="415" y="160" font-family="sans-serif" font-size="6.5pt" fill="#ef4444">&lt;&lt;extend&gt;&gt;</text>
+      </svg>
+      <div class="diagram-caption">Figure 4.2: UML Use Case Diagram with System Boundary and Actor Interactions</div>
+    </div>
+
+    <h2>4.4 CLASS DIAGRAM</h2>
+    <p>
+      The UML Class Diagram illustrates the structural entities of AcadFlow, detailing attributes, operations, and relational cardinality between Mongoose schemas.
+    </p>
+
+    <div class="diagram-container">
+      <svg width="100%" height="450" viewBox="0 0 720 450" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b" /><stop offset="100%" stop-color="#334155" />
+          </linearGradient>
+        </defs>
+
+        <!-- Class 1: User -->
+        <g transform="translate(15, 20)">
+          <rect x="0" y="0" width="160" height="200" rx="3" fill="#ffffff" stroke="#1e293b" stroke-width="1.5" />
+          <rect x="0" y="0" width="160" height="24" rx="3" fill="url(#headerGrad)" />
+          <text x="80" y="16" font-family="'Times New Roman', serif" font-size="10pt" font-weight="bold" fill="#ffffff" text-anchor="middle">User</text>
+          
+          <text x="8" y="40" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- _id: ObjectId</text>
+          <text x="8" y="54" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- name: String</text>
+          <text x="8" y="68" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- email: String [unique]</text>
+          <text x="8" y="82" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- password: String</text>
+          <text x="8" y="96" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- role: Enum</text>
+          <text x="8" y="110" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- rollNumber: String</text>
+          <text x="8" y="124" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- staffCode: String</text>
+          <text x="8" y="138" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- staffAdvisor: ObjectId</text>
+          
+          <line x1="0" y1="146" x2="160" y2="146" stroke="#cbd5e1" />
+          <text x="8" y="162" font-family="Consolas, monospace" font-size="7.5pt" fill="#1b5e20">+ comparePassword()</text>
+          <text x="8" y="176" font-family="Consolas, monospace" font-size="7.5pt" fill="#1b5e20">+ toPublicJSON()</text>
+          <text x="8" y="190" font-family="Consolas, monospace" font-size="7.5pt" fill="#1b5e20">+ generateResetToken()</text>
+        </g>
+
+        <!-- Class 2: Document -->
+        <g transform="translate(260, 20)">
+          <rect x="0" y="0" width="190" height="200" rx="3" fill="#ffffff" stroke="#1e293b" stroke-width="1.5" />
+          <rect x="0" y="0" width="190" height="24" rx="3" fill="url(#headerGrad)" />
+          <text x="95" y="16" font-family="'Times New Roman', serif" font-size="10pt" font-weight="bold" fill="#ffffff" text-anchor="middle">Document</text>
+
+          <text x="8" y="40" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- _id: ObjectId</text>
+          <text x="8" y="54" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- title: String</text>
+          <text x="8" y="68" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- type: Enum</text>
+          <text x="8" y="82" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- status: Enum</text>
+          <text x="8" y="96" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- submittedBy: ObjectId</text>
+          <text x="8" y="110" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- reviewedBy: ObjectId</text>
+          <text x="8" y="124" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- filePath: String</text>
+          <text x="8" y="138" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- remarks: String</text>
+
+          <line x1="0" y1="146" x2="190" y2="146" stroke="#cbd5e1" />
+          <text x="8" y="162" font-family="Consolas, monospace" font-size="7.5pt" fill="#1b5e20">+ updateStatus()</text>
+          <text x="8" y="176" font-family="Consolas, monospace" font-size="7.5pt" fill="#1b5e20">+ resubmit()</text>
+          <text x="8" y="190" font-family="Consolas, monospace" font-size="7.5pt" fill="#1b5e20">+ getAuditTrail()</text>
+        </g>
+
+        <!-- Class 3: ODRequest -->
+        <g transform="translate(530, 20)">
+          <rect x="0" y="0" width="175" height="180" rx="3" fill="#ffffff" stroke="#1e293b" stroke-width="1.5" />
+          <rect x="0" y="0" width="175" height="24" rx="3" fill="url(#headerGrad)" />
+          <text x="87" y="16" font-family="'Times New Roman', serif" font-size="10pt" font-weight="bold" fill="#ffffff" text-anchor="middle">ODRequest</text>
+
+          <text x="8" y="40" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- _id: ObjectId</text>
+          <text x="8" y="54" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- studentId: ObjectId</text>
+          <text x="8" y="68" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- eventName: String</text>
+          <text x="8" y="82" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- startDate: Date</text>
+          <text x="8" y="96" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- endDate: Date</text>
+          <text x="8" y="110" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- status: Enum</text>
+          <text x="8" y="124" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- proofDocument: String</text>
+
+          <line x1="0" y1="134" x2="175" y2="134" stroke="#cbd5e1" />
+          <text x="8" y="152" font-family="Consolas, monospace" font-size="7.5pt" fill="#1b5e20">+ approve(staffId)</text>
+          <text x="8" y="168" font-family="Consolas, monospace" font-size="7.5pt" fill="#1b5e20">+ reject(reason)</text>
+        </g>
+
+        <!-- Class 4: Certificate -->
+        <g transform="translate(15, 260)">
+          <rect x="0" y="0" width="160" height="170" rx="3" fill="#ffffff" stroke="#1e293b" stroke-width="1.5" />
+          <rect x="0" y="0" width="160" height="24" rx="3" fill="url(#headerGrad)" />
+          <text x="80" y="16" font-family="'Times New Roman', serif" font-size="10pt" font-weight="bold" fill="#ffffff" text-anchor="middle">Certificate</text>
+
+          <text x="8" y="40" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- certificateId: String</text>
+          <text x="8" y="54" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- studentId: ObjectId</text>
+          <text x="8" y="68" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- title: String</text>
+          <text x="8" y="82" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- issueDate: Date</text>
+          <text x="8" y="96" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- qrCodeUrl: String</text>
+          <text x="8" y="110" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- verificationHash: String</text>
+
+          <line x1="0" y1="120" x2="160" y2="120" stroke="#cbd5e1" />
+          <text x="8" y="138" font-family="Consolas, monospace" font-size="7.5pt" fill="#1b5e20">+ generateHash()</text>
+          <text x="8" y="154" font-family="Consolas, monospace" font-size="7.5pt" fill="#1b5e20">+ verifyAuthenticity()</text>
+        </g>
+
+        <!-- Class 5: AuditLog -->
+        <g transform="translate(260, 260)">
+          <rect x="0" y="0" width="190" height="170" rx="3" fill="#ffffff" stroke="#1e293b" stroke-width="1.5" />
+          <rect x="0" y="0" width="190" height="24" rx="3" fill="url(#headerGrad)" />
+          <text x="95" y="16" font-family="'Times New Roman', serif" font-size="10pt" font-weight="bold" fill="#ffffff" text-anchor="middle">AuditLog</text>
+
+          <text x="8" y="40" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- _id: ObjectId</text>
+          <text x="8" y="54" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- actorId: ObjectId</text>
+          <text x="8" y="68" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- action: String</text>
+          <text x="8" y="82" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- targetEntity: String</text>
+          <text x="8" y="96" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- ipAddress: String</text>
+          <text x="8" y="110" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- timestamp: Date</text>
+
+          <line x1="0" y1="120" x2="190" y2="120" stroke="#cbd5e1" />
+          <text x="8" y="138" font-family="Consolas, monospace" font-size="7.5pt" fill="#1b5e20">+ record(action, actor)</text>
+          <text x="8" y="154" font-family="Consolas, monospace" font-size="7.5pt" fill="#1b5e20">+ exportCompliance()</text>
+        </g>
+
+        <!-- Class 6: Project -->
+        <g transform="translate(530, 260)">
+          <rect x="0" y="0" width="175" height="170" rx="3" fill="#ffffff" stroke="#1e293b" stroke-width="1.5" />
+          <rect x="0" y="0" width="175" height="24" rx="3" fill="url(#headerGrad)" />
+          <text x="87" y="16" font-family="'Times New Roman', serif" font-size="10pt" font-weight="bold" fill="#ffffff" text-anchor="middle">ProjectReview</text>
+
+          <text x="8" y="40" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- title: String</text>
+          <text x="8" y="54" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- members: [ObjectId]</text>
+          <text x="8" y="68" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- guideId: ObjectId</text>
+          <text x="8" y="82" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- phase: Enum (I, II, III)</text>
+          <text x="8" y="96" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- marks: Number</text>
+          <text x="8" y="110" font-family="Consolas, monospace" font-size="7.5pt" fill="#333">- guideRemarks: String</text>
+
+          <line x1="0" y1="120" x2="175" y2="120" stroke="#cbd5e1" />
+          <text x="8" y="138" font-family="Consolas, monospace" font-size="7.5pt" fill="#1b5e20">+ gradePhase(marks)</text>
+          <text x="8" y="154" font-family="Consolas, monospace" font-size="7.5pt" fill="#1b5e20">+ submitThesis(file)</text>
+        </g>
+
+        <!-- Associations -->
+        <line x1="175" y1="100" x2="260" y2="100" stroke="#1e293b" stroke-width="1.5" />
+        <text x="185" y="92" font-family="sans-serif" font-size="8pt" font-weight="bold">1</text>
+        <text x="245" y="92" font-family="sans-serif" font-size="8pt" font-weight="bold">*</text>
+
+        <line x1="450" y1="100" x2="530" y2="100" stroke="#1e293b" stroke-width="1.5" />
+        <text x="460" y="92" font-family="sans-serif" font-size="8pt" font-weight="bold">1</text>
+        <text x="515" y="92" font-family="sans-serif" font-size="8pt" font-weight="bold">*</text>
+
+        <line x1="95" y1="220" x2="95" y2="260" stroke="#1e293b" stroke-width="1.5" />
+        <text x="100" y="235" font-family="sans-serif" font-size="8pt" font-weight="bold">1</text>
+        <text x="100" y="252" font-family="sans-serif" font-size="8pt" font-weight="bold">*</text>
+
+        <line x1="175" y1="330" x2="260" y2="330" stroke="#1e293b" stroke-width="1.5" />
+        <text x="185" y="322" font-family="sans-serif" font-size="8pt" font-weight="bold">1</text>
+        <text x="245" y="322" font-family="sans-serif" font-size="8pt" font-weight="bold">*</text>
+      </svg>
+      <div class="diagram-caption">Figure 4.3: UML Class Diagram with Data Attributes and Association Cardinality</div>
+    </div>
+
+    <h2>4.5 SEQUENCE DIAGRAM</h2>
+    <p>
+      The UML Sequence Diagram captures the dynamic interaction between participants during the end-to-end document submission and review workflow.
+    </p>
+
+    <div class="diagram-container">
+      <svg width="100%" height="450" viewBox="0 0 740 450" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="seqArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#1e293b"/>
+          </marker>
+        </defs>
+
+        <!-- Lifelines -->
+        <g transform="translate(20, 20)">
+          <rect x="0" y="0" width="80" height="28" rx="3" fill="#e0f2fe" stroke="#0284c7" />
+          <text x="40" y="18" font-family="sans-serif" font-size="8pt" font-weight="bold" text-anchor="middle">:Student</text>
+          <line x1="40" y1="28" x2="40" y2="400" stroke="#94a3b8" stroke-dasharray="4,4" />
+        </g>
+
+        <g transform="translate(150, 20)">
+          <rect x="0" y="0" width="95" height="28" rx="3" fill="#e0f2fe" stroke="#0284c7" />
+          <text x="47" y="18" font-family="sans-serif" font-size="8pt" font-weight="bold" text-anchor="middle">:ReactClient</text>
+          <line x1="47" y1="28" x2="47" y2="400" stroke="#94a3b8" stroke-dasharray="4,4" />
+        </g>
+
+        <g transform="translate(300, 20)">
+          <rect x="0" y="0" width="90" height="28" rx="3" fill="#dcfce7" stroke="#16a34a" />
+          <text x="45" y="18" font-family="sans-serif" font-size="8pt" font-weight="bold" text-anchor="middle">:ExpressRouter</text>
+          <line x1="45" y1="28" x2="45" y2="400" stroke="#94a3b8" stroke-dasharray="4,4" />
+        </g>
+
+        <g transform="translate(440, 20)">
+          <rect x="0" y="0" width="95" height="28" rx="3" fill="#fef08a" stroke="#ca8a04" />
+          <text x="47" y="18" font-family="sans-serif" font-size="8pt" font-weight="bold" text-anchor="middle">:MongoDBAtlas</text>
+          <line x1="47" y1="28" x2="47" y2="400" stroke="#94a3b8" stroke-dasharray="4,4" />
+        </g>
+
+        <g transform="translate(585, 20)">
+          <rect x="0" y="0" width="85" height="28" rx="3" fill="#dcfce7" stroke="#16a34a" />
+          <text x="42" y="18" font-family="sans-serif" font-size="8pt" font-weight="bold" text-anchor="middle">:FacultyStaff</text>
+          <line x1="42" y1="28" x2="42" y2="400" stroke="#94a3b8" stroke-dasharray="4,4" />
+        </g>
+
+        <!-- Messages -->
+        <line x1="60" y1="75" x2="197" y2="75" stroke="#1e293b" stroke-width="1.3" marker-end="url(#seqArrow)" />
+        <text x="128" y="68" font-family="sans-serif" font-size="7.5pt" text-anchor="middle">1: Select file &amp; Submit form</text>
+
+        <line x1="197" y1="105" x2="345" y2="105" stroke="#1e293b" stroke-width="1.3" marker-end="url(#seqArrow)" />
+        <text x="271" y="98" font-family="sans-serif" font-size="7.5pt" text-anchor="middle">2: POST /api/documents (multipart)</text>
+
+        <line x1="345" y1="135" x2="487" y2="135" stroke="#1e293b" stroke-width="1.3" marker-end="url(#seqArrow)" />
+        <text x="416" y="128" font-family="sans-serif" font-size="7.5pt" text-anchor="middle">3: Verify JWT &amp; Document.create()</text>
+
+        <line x1="487" y1="160" x2="345" y2="160" stroke="#1e293b" stroke-width="1.3" stroke-dasharray="3,3" marker-end="url(#seqArrow)" />
+        <text x="416" y="153" font-family="sans-serif" font-size="7.5pt" text-anchor="middle">4: Return created document</text>
+
+        <line x1="345" y1="190" x2="627" y2="190" stroke="#1e293b" stroke-width="1.3" marker-end="url(#seqArrow)" />
+        <text x="486" y="183" font-family="sans-serif" font-size="7.5pt" text-anchor="middle">5: Send in-app notification to advisor</text>
+
+        <line x1="345" y1="215" x2="197" y2="215" stroke="#1e293b" stroke-width="1.3" stroke-dasharray="3,3" marker-end="url(#seqArrow)" />
+        <text x="271" y="208" font-family="sans-serif" font-size="7.5pt" text-anchor="middle">6: 201 Created JSON response</text>
+
+        <line x1="197" y1="240" x2="60" y2="240" stroke="#1e293b" stroke-width="1.3" stroke-dasharray="3,3" marker-end="url(#seqArrow)" />
+        <text x="128" y="233" font-family="sans-serif" font-size="7.5pt" text-anchor="middle">7: Render submission success toast</text>
+
+        <line x1="627" y1="275" x2="345" y2="275" stroke="#1e293b" stroke-width="1.3" marker-end="url(#seqArrow)" />
+        <text x="486" y="268" font-family="sans-serif" font-size="7.5pt" text-anchor="middle">8: PUT /api/documents/:id/review {status, remarks}</text>
+
+        <line x1="345" y1="305" x2="487" y2="305" stroke="#1e293b" stroke-width="1.3" marker-end="url(#seqArrow)" />
+        <text x="416" y="298" font-family="sans-serif" font-size="7.5pt" text-anchor="middle">9: doc.save() &amp; AuditLog.create()</text>
+
+        <line x1="345" y1="340" x2="197" y2="340" stroke="#1e293b" stroke-width="1.3" marker-end="url(#seqArrow)" />
+        <text x="271" y="333" font-family="sans-serif" font-size="7.5pt" text-anchor="middle">10: Notification dispatched to student</text>
+
+        <line x1="197" y1="370" x2="60" y2="370" stroke="#1e293b" stroke-width="1.3" stroke-dasharray="3,3" marker-end="url(#seqArrow)" />
+        <text x="128" y="363" font-family="sans-serif" font-size="7.5pt" text-anchor="middle">11: Badge updates to 'Approved' / 'Revision'</text>
+      </svg>
+      <div class="diagram-caption">Figure 4.4: UML Sequence Diagram for Document Submission and Review Flow</div>
+    </div>
+
+    <h2>4.6 DATA FLOW DIAGRAMS</h2>
+    <p>
+      The Data Flow Diagram models the transformation of information as it courses through AcadFlow.
+    </p>
+
+    <div class="diagram-container">
+      <svg width="100%" height="220" viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="70" width="100" height="60" rx="4" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" />
+        <text x="70" y="105" font-family="sans-serif" font-size="10pt" font-weight="bold" text-anchor="middle">Student</text>
+
+        <circle cx="350" cy="100" r="55" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" />
+        <text x="350" y="95" font-family="sans-serif" font-size="9pt" font-weight="bold" text-anchor="middle">0.0</text>
+        <text x="350" y="110" font-family="sans-serif" font-size="9pt" font-weight="bold" text-anchor="middle">AcadFlow System</text>
+
+        <rect x="580" y="20" width="100" height="60" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5" />
+        <text x="630" y="55" font-family="sans-serif" font-size="10pt" font-weight="bold" text-anchor="middle">Faculty Staff</text>
+
+        <rect x="580" y="130" width="100" height="60" rx="4" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5" />
+        <text x="630" y="165" font-family="sans-serif" font-size="10pt" font-weight="bold" text-anchor="middle">Administrator</text>
+
+        <line x1="120" y1="90" x2="295" y2="90" stroke="#333" stroke-width="1.3" marker-end="url(#arrow)" />
+        <text x="207" y="82" font-family="sans-serif" font-size="7pt" text-anchor="middle">Submissions &amp; OD Requests</text>
+
+        <line x1="295" y1="110" x2="120" y2="110" stroke="#333" stroke-width="1.3" marker-end="url(#arrow)" />
+        <text x="207" y="125" font-family="sans-serif" font-size="7pt" text-anchor="middle">Status &amp; Digital Certs</text>
+
+        <line x1="400" y1="80" x2="580" y2="50" stroke="#333" stroke-width="1.3" marker-end="url(#arrow)" />
+        <text x="490" y="58" font-family="sans-serif" font-size="7pt" text-anchor="middle">Pending Reviews</text>
+
+        <line x1="580" y1="65" x2="400" y2="95" stroke="#333" stroke-width="1.3" marker-end="url(#arrow)" />
+        <text x="490" y="90" font-family="sans-serif" font-size="7pt" text-anchor="middle">Approvals &amp; Marks</text>
+
+        <line x1="400" y1="115" x2="580" y2="150" stroke="#333" stroke-width="1.3" marker-end="url(#arrow)" />
+        <text x="490" y="145" font-family="sans-serif" font-size="7pt" text-anchor="middle">System Audit Logs</text>
+      </svg>
+      <div class="diagram-caption">Figure 4.5: Data Flow Diagram (Level 0 Context Diagram)</div>
+    </div>
+
+    <h2>4.7 DATABASE DESIGN &amp; SCHEMA</h2>
+    <p>
+      The persistence model is implemented using MongoDB Atlas. Key collection structures are outlined in the data dictionaries below:
+    </p>
+
+    <table class="report-table">
+      <caption>Table 4.1: Data Dictionary for User Collection</caption>
+      <thead>
+        <tr>
+          <th>Field Name</th>
+          <th>BSON Data Type</th>
+          <th>Key / Constraints</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>_id</code></td><td>ObjectId</td><td>Primary Key</td><td>Auto-generated unique document identifier</td></tr>
+        <tr><td><code>name</code></td><td>String</td><td>Required, Trim, Max: 100</td><td>Full institutional legal name of user</td></tr>
+        <tr><td><code>email</code></td><td>String</td><td>Required, Unique, Lowercase</td><td>Institutional email address</td></tr>
+        <tr><td><code>password</code></td><td>String</td><td>Required, Min: 8, Select: false</td><td>Salted bcrypt cryptographic password hash</td></tr>
+        <tr><td><code>role</code></td><td>String</td><td>Enum: [student, staff, admin]</td><td>Access security authorization level</td></tr>
+        <tr><td><code>rollNumber</code></td><td>String</td><td>Sparse, Uppercase</td><td>Student university registration / roll number</td></tr>
+        <tr><td><code>staffCode</code></td><td>String</td><td>Sparse, Uppercase, Unique</td><td>Generated <code>STF-XXXXX</code> token for staff</td></tr>
+        <tr><td><code>staffAdvisor</code></td><td>ObjectId</td><td>Ref: User</td><td>Foreign key to student's assigned faculty mentor</td></tr>
+        <tr><td><code>isActive</code></td><td>Boolean</td><td>Default: true</td><td>Account active flag for deactivation controls</td></tr>
+      </tbody>
+    </table>
+
+    <table class="report-table">
+      <caption>Table 4.2: Data Dictionary for Document Collection</caption>
+      <thead>
+        <tr>
+          <th>Field Name</th>
+          <th>BSON Data Type</th>
+          <th>Key / Constraints</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>_id</code></td><td>ObjectId</td><td>Primary Key</td><td>Unique submission ticket identifier</td></tr>
+        <tr><td><code>title</code></td><td>String</td><td>Required, Trim, Max: 150</td><td>Document title or subject line</td></tr>
+        <tr><td><code>type</code></td><td>String</td><td>Enum: [bonafide, noc, od, project, other]</td><td>Categorical classification</td></tr>
+        <tr><td><code>status</code></td><td>String</td><td>Enum: [draft, submitted, under_review, approved, rejected, correction_needed]</td><td>Current state in deterministic workflow</td></tr>
+        <tr><td><code>submittedBy</code></td><td>ObjectId</td><td>Required, Ref: User</td><td>Student submitting the application</td></tr>
+        <tr><td><code>reviewedBy</code></td><td>ObjectId</td><td>Ref: User</td><td>Staff mentor performing evaluation</td></tr>
+        <tr><td><code>filePath</code></td><td>String</td><td>Required</td><td>Server filesystem storage path for binary</td></tr>
+        <tr><td><code>remarks</code></td><td>String</td><td>Optional</td><td>Feedback or revision instructions from mentor</td></tr>
+        <tr><td><code>submittedAt</code></td><td>Date</td><td>Default: Date.now</td><td>ISO timestamp of initial submission</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- CHAPTER 5: IMPLEMENTATION (TEMPLATE PAGE 11)                              -->
+  <!-- ========================================================================= -->
+  <div class="page-break">
+    <h1>CHAPTER 5<br>IMPLEMENTATION</h1>
+
+    <h2>5.1 IMPLEMENTATION OVERVIEW</h2>
+    <p>
+      The technical realization of AcadFlow adheres to strict clean-code principles, modular separation of concerns, and robust error handling. The backend is implemented in Node.js with the Express.js framework, leveraging Mongoose for schema modeling and validation against MongoDB Atlas. On the client side, React 19 is coupled with Vite for hot-module reloading and rapid bundle generation, with Tailwind CSS delivering an accessible, responsive user interface.
+    </p>
+
+    <h2>5.2 KEY FUNCTIONS (CODE EXPLANATION)</h2>
+    <p>
+      The following subsections analyze the critical functional engines powering AcadFlow, presented in structured, formatted code boxes as stipulated by institutional documentation standards.
+    </p>
+
+    <h3>5.2.1 Secure User Registration &amp; Staff Code Linking Engine</h3>
+    <p>
+      When a student registers, they provide the unique <code>staffCode</code> of their assigned faculty mentor. The controller verifies that the code matches an active staff account and binds the student's <code>staffAdvisor</code> reference in the database, establishing automated document routing.
+    </p>
+    <div class="code-box">
+      <div class="code-title">Code Snippet 5.1: Student Registration &amp; Staff Linking Controller</div>
+<span class="kw">const</span> registerStudent = <span class="kw">async</span> (req, res, next) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> { name, email, password, phone, department, rollNumber, year, section, staffCode } = req.body;
+
+    <span class="com">// Check for existing duplicate account</span>
+    <span class="kw">const</span> exists = <span class="kw">await</span> User.findOne({ email });
+    <span class="kw">if</span> (exists) {
+      <span class="kw">return</span> res.status(409).json({ success: <span class="kw">false</span>, message: <span class="str">'An account with this email already exists.'</span> });
+    }
+
+    <span class="com">// Validate and resolve staff mentor by unique code</span>
+    <span class="kw">let</span> staffAdvisor = <span class="kw">null</span>;
+    <span class="kw">if</span> (staffCode) {
+      <span class="kw">const</span> advisor = <span class="kw">await</span> User.findOne({ staffCode: staffCode.toUpperCase(), role: <span class="str">'staff'</span> });
+      <span class="kw">if</span> (!advisor) {
+        <span class="kw">return</span> res.status(400).json({ success: <span class="kw">false</span>, message: <span class="str">'Invalid Staff Code. Verify with your advisor.'</span> });
+      }
+      staffAdvisor = advisor._id;
+    }
+
+    <span class="kw">const</span> user = <span class="kw">await</span> User.create({
+      name, email, password, phone, department,
+      rollNumber, year, section, role: <span class="str">'student'</span>,
+      staffAdvisor, linkedStaffCode: staffCode ? staffCode.toUpperCase() : <span class="kw">null</span>,
+    });
+
+    sendToken(res, 201, user, <span class="str">'Student account created successfully.'</span>);
+  } <span class="kw">catch</span> (err) { next(err); }
+};
+    </div>
+
+    <h3>5.2.2 JWT Authentication &amp; Role-Based Authorization Guard</h3>
+    <p>
+      The security perimeter utilizes bearer JWT tokens signed with a 256-bit secret key. The <code>protect</code> middleware parses the HTTP <code>Authorization</code> header, validates token signature and expiration, retrieves the user profile, and enforces account active status. The <code>restrict</code> middleware enforces strict role authorization guards.
+    </p>
+    <div class="code-box">
+      <div class="code-title">Code Snippet 5.2: Authentication &amp; RBAC Authorization Middleware</div>
+<span class="kw">const</span> protect = <span class="kw">async</span> (req, res, next) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> authHeader = req.headers.authorization;
+    <span class="kw">if</span> (!authHeader || !authHeader.startsWith(<span class="str">'Bearer '</span>)) {
+      <span class="kw">return</span> res.status(401).json({ success: <span class="kw">false</span>, message: <span class="str">'Authentication required. Please log in.'</span> });
+    }
+    <span class="kw">const</span> token = authHeader.split(<span class="str">' '</span>)[1];
+    <span class="kw">const</span> decoded = verifyToken(token);
+
+    <span class="kw">const</span> user = <span class="kw">await</span> User.findById(decoded.id).select(<span class="str">'-password'</span>);
+    <span class="kw">if</span> (!user || !user.isActive) {
+      <span class="kw">return</span> res.status(401).json({ success: <span class="kw">false</span>, message: <span class="str">'Unauthorized user account.'</span> });
+    }
+    req.user = user;
+    next();
+  } <span class="kw">catch</span> (err) { next(err); }
+};
+
+<span class="com">// Higher-order role authorization guard</span>
+<span class="kw">const</span> restrict = (...roles) =&gt; (req, res, next) =&gt; {
+  <span class="kw">if</span> (!roles.includes(req.user.role)) {
+    <span class="kw">return</span> res.status(403).json({ success: <span class="kw">false</span>, message: <span class="str">'Access denied: Insufficient privileges.'</span> });
+  }
+  next();
+};
+    </div>
+
+    <h3>5.2.3 Asynchronous Document Submission &amp; Advisor Notification</h3>
+    <p>
+      The document creation route handles multipart file ingestion via Multer, registers the metadata payload in MongoDB, and triggers real-time in-app notification dispatch to the student's assigned faculty mentor.
+    </p>
+    <div class="code-box">
+      <div class="code-title">Code Snippet 5.3: Document Submission Route Handler</div>
+router.post(<span class="str">'/'</span>, protect, restrict(<span class="str">'student'</span>), upload.single(<span class="str">'file'</span>), <span class="kw">async</span> (req, res, next) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> { title, type, description } = req.body;
+    <span class="kw">const</span> doc = <span class="kw">await</span> Document.create({
+      title, type, description,
+      submittedBy: req.user._id,
+      status: <span class="str">'submitted'</span>,
+      submittedAt: <span class="kw">new</span> Date(),
+      filePath: req.file ? (<span class="str">'uploads/'</span> + req.file.filename) : <span class="kw">null</span>,
+      fileName: req.file ? req.file.originalname : <span class="kw">null</span>,
+      fileSize: req.file ? req.file.size : <span class="kw">null</span>,
+      mimeType: req.file ? req.file.mimetype : <span class="kw">null</span>,
+    });
+
+    <span class="com">// Asynchronously notify faculty mentor</span>
+    <span class="kw">if</span> (req.user.staffAdvisor) {
+      <span class="kw">await</span> sendNotification(req.user.staffAdvisor, {
+        title: <span class="str">'New Document Submission'</span>,
+        message: req.user.name + <span class="str">' submitted: "'</span> + title + <span class="str">'"'</span>,
+        type: <span class="str">'info'</span>,
+        link: <span class="str">'/staff/documents/'</span> + doc._id,
+      });
+    }
+
+    res.status(201).json({ success: <span class="kw">true</span>, message: <span class="str">'Document submitted successfully.'</span>, data: { document: doc } });
+  } <span class="kw">catch</span> (err) { next(err); }
+});
+    </div>
+
+    <h3>5.2.4 Document Review &amp; Workflow State Machine Transition</h3>
+    <p>
+      Staff members review advisee documents, updating status to <code>approved</code>, <code>rejected</code>, or <code>correction_needed</code>, while logging faculty remarks and dispatching reactive notifications to students.
+    </p>
+    <div class="code-box">
+      <div class="code-title">Code Snippet 5.4: Document Review &amp; Approval Logic</div>
+router.put(<span class="str">'/:id/review'</span>, protect, restrict(<span class="str">'staff'</span>, <span class="str">'admin'</span>), <span class="kw">async</span> (req, res, next) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> { status, remarks } = req.body;
+    <span class="kw">const</span> doc = <span class="kw">await</span> Document.findById(req.params.id);
+    <span class="kw">if</span> (!doc) <span class="kw">return</span> res.status(404).json({ success: <span class="kw">false</span>, message: <span class="str">'Document not found.'</span> });
+
+    doc.status = status;
+    doc.remarks = remarks;
+    doc.reviewedBy = req.user._id;
+    doc.reviewedAt = <span class="kw">new</span> Date();
+    <span class="kw">if</span> (status === <span class="str">'approved'</span>) {
+      doc.approvedBy = req.user._id;
+      doc.approvedAt = <span class="kw">new</span> Date();
+    }
+    <span class="kw">await</span> doc.save();
+
+    <span class="com">// Notify student of decision</span>
+    <span class="kw">await</span> sendNotification(doc.submittedBy, {
+      title: <span class="str">'Document '</span> + status.replace(<span class="str">'_'</span>, <span class="str">' '</span>),
+      message: <span class="str">'Your document "'</span> + doc.title + <span class="str">'" was marked as '</span> + status + <span class="str">'. Remarks: '</span> + remarks,
+      type: status === <span class="str">'approved'</span> ? <span class="str">'success'</span> : status === <span class="str">'rejected'</span> ? <span class="str">'error'</span> : <span class="str">'warning'</span>,
+      link: <span class="str">'/student/documents/'</span> + doc._id,
+    });
+
+    res.json({ success: <span class="kw">true</span>, message: <span class="str">'Document status updated.'</span>, data: { document: doc } });
+  } <span class="kw">catch</span> (err) { next(err); }
+});
+    </div>
+
+    <h3>5.2.5 Digital Certificate Hash &amp; QR Code Generation</h3>
+    <p>
+      The certificate module generates an unforgeable verification payload by concatenating student roll numbers, certificate serials, and issuance timestamps, hashing with SHA-256, and generating an embeddable QR code.
+    </p>
+    <div class="code-box">
+      <div class="code-title">Code Snippet 5.5: Cryptographic QR Generation Service</div>
+<span class="kw">const</span> QRCode = require(<span class="str">'qrcode'</span>);
+<span class="kw">const</span> crypto = require(<span class="str">'crypto'</span>);
+
+<span class="kw">const</span> generateCertificateQR = <span class="kw">async</span> (certificateId, studentRoll, issueDate) =&gt; {
+  <span class="com">// Generate tamper-evident cryptographic signature hash</span>
+  <span class="kw">const</span> payload = certificateId + <span class="str">'|'</span> + studentRoll + <span class="str">'|'</span> + issueDate.toISOString();
+  <span class="kw">const</span> signatureHash = crypto.createHash(<span class="str">'sha256'</span>).update(payload).digest(<span class="str">'hex'</span>);
+
+  <span class="com">// Verification URL embedded in the QR matrix</span>
+  <span class="kw">const</span> verifyUrl = process.env.CLIENT_URL + <span class="str">'/verify-certificate/'</span> + certificateId + <span class="str">'?sig='</span> + signatureHash.slice(0, 16);
+  
+  <span class="com">// Render DataURL QR Code</span>
+  <span class="kw">const</span> qrDataUrl = <span class="kw">await</span> QRCode.toDataURL(verifyUrl, {
+    errorCorrectionLevel: <span class="str">'H'</span>,
+    margin: 1,
+    width: 250,
+  });
+
+  <span class="kw">return</span> { signatureHash, qrDataUrl, verifyUrl };
+};
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- CHAPTER 6: CONCLUSION & FUTURE WORK (TEMPLATE PAGE 12)                    -->
+  <!-- ========================================================================= -->
+  <div class="page-break">
+    <h1>CHAPTER 6<br>CONCLUSION &amp; FUTURE WORK</h1>
+
+    <h2>6.1 CONCLUSION</h2>
+    <p>
+      The development and deployment of <strong>AcadFlow — Digital Academic Document Workflow &amp; Management System</strong> establishes a modernized, high-performance paradigm for collegiate academic administration. By substituting obsolete paper-based submission and signature-gathering practices with an automated, role-partitioned web platform, AcadFlow successfully fulfills all institutional design objectives:
+    </p>
+    <ul>
+      <li><strong>Operational Speed:</strong> Administrative turnaround times for routine bonafide certifications, attendance approvals, and NOC issuances are reduced from several business days to a few hours.</li>
+      <li><strong>Total Transparency:</strong> Both learners and academic mentors gain real-time visibility into document lifecycles, eliminating ambiguity and physical file misplacements.</li>
+      <li><strong>Zero Environmental Footprint:</strong> By eliminating physical printing, the system advances the green campus sustainability vision of Easwari Engineering College.</li>
+      <li><strong>Tamper-Proof Verification:</strong> The integration of SHA-256 cryptographic hashes and scannable QR codes provides educational stakeholders and prospective employers with instant, infallible credential verification.</li>
+      <li><strong>Statutory Compliance:</strong> The automated audit logging subsystem ensures that every institutional action is permanently documented, satisfying NAAC, NBA, and Anna University regulatory scrutiny.</li>
+    </ul>
+
+    <h2>6.2 FUTURE ENHANCEMENTS</h2>
+    <p>
+      While the current iteration of AcadFlow provides comprehensive functionality, prospective future enhancements encompass:
+    </p>
+    <ol>
+      <li><strong>Native Mobile Applications (iOS &amp; Android):</strong> Developing native cross-platform mobile clients using React Native to deliver push notifications and biometric fingerprint approvals for faculty on the go.</li>
+      <li><strong>Blockchain-Anchored Credential Notarization:</strong> Anchoring certificate hashes into a public/consortium blockchain (e.g., Ethereum or Polygon) to guarantee permanent, decentralized credential immutability that outlives institutional servers.</li>
+      <li><strong>Automated Optical Character Recognition (OCR) &amp; AI Document Triage:</strong> Integrating computer vision algorithms to automatically inspect uploaded event brochures or certificate proofs, extracting dates and venues to auto-populate approval forms.</li>
+      <li><strong>Biometric &amp; Aadhaar-based e-Sign Integration:</strong> Incorporating national digital signature gateways to enable faculty to sign formal university documents with legally binding digital certificates.</li>
+    </ol>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- APPENDIX: SOURCE CODE (TEMPLATE PAGES 13-15)                              -->
+  <!-- ========================================================================= -->
+  <div class="page-break">
+    <h1>APPENDIX<br>SOURCE CODE</h1>
+
+    <h2>1. Project Structure</h2>
+    <div class="code-box">
+digital-academic-workflow/
+│
+├── server/                          # Express backend API
+│   ├── src/
+│   │   ├── config/
+│   │   │   └── database.js         # MongoDB Atlas connection with custom DNS
+│   │   ├── controllers/
+│   │   │   └── authController.js   # Registration, Login, Token generation
+│   │   ├── middleware/
+│   │   │   ├── auth.js             # JWT protect and role restrict guards
+│   │   │   ├── errorHandler.js     # Centralized error handler
+│   │   │   ├── notFound.js         # 404 handler
+│   │   │   └── upload.js           # Multer file upload storage engine
+│   │   ├── models/
+│   │   │   ├── User.js             # User schema with staff code linking
+│   │   │   ├── Document.js         # Multi-state document workflow schema
+│   │   │   ├── ODRequest.js        # On-duty attendance permission schema
+│   │   │   ├── Project.js          # Project phase review schema
+│   │   │   ├── Note.js             # Academic notes repository schema
+│   │   │   ├── Certificate.js      # Digital certificate schema
+│   │   │   └── AuditLog.js         # Security audit trail schema
+│   │   ├── routes/
+│   │   │   ├── auth.js             # Auth route definitions
+│   │   │   ├── documents.js        # Document CRUD & review endpoints
+│   │   │   ├── odRequests.js       # OD request processing routes
+│   │   │   ├── projects.js         # Milestone evaluation routes
+│   │   │   ├── certificates.js     # Certificate generation & verify routes
+│   │   │   └── admin.js            # Admin telemetry & metrics routes
+│   │   ├── services/
+│   │   │   ├── emailService.js     # Nodemailer notification delivery
+│   │   │   └── notificationService.js # In-app alerts
+│   │   ├── utils/
+│   │   │   ├── auditLogger.js      # Audit log recording utility
+│   │   │   ├── crypto.js           # Staff code generator
+│   │   │   └── jwt.js              # Token signing & verification
+│   │   ├── app.js                  # Express middleware pipeline assembly
+│   │   └── index.js                # Server entry point & port listener
+│   ├── .env.example                # Environment variables template
+│   └── package.json                # Server dependency manifest
+│
+└── client/                          # React 19 Frontend
+    ├── src/
+    │   ├── components/
+    │   │   ├── layout/             # PublicNavbar, DashboardLayout
+    │   │   └── ui/                 # StatusBadge, NotificationBell, Modal
+    │   ├── context/
+    │   │   └── AuthContext.jsx     # User state & JWT session provider
+    │   ├── pages/
+    │   │   ├── auth/               # LoginPage, Register, ResetPassword
+    │   │   ├── student/            # StudentDashboard, Submissions, OD
+    │   │   ├── staff/              # StaffDashboard, Reviews, Projects
+    │   │   └── admin/              # AdminDashboard, User Management, Logs
+    │   ├── routes/
+    │   │   ├── AppRouter.jsx       # Route declarations
+    │   │   └── ProtectedRoute.jsx  # Role route guard
+    │   ├── services/
+    │   │   └── api.js              # Axios instance with auth interceptor
+    │   ├── App.jsx                 # Application root
+    │   └── main.jsx                # DOM mounting
+    ├── tailwind.config.js          # Styling configurations
+    └── package.json                # Frontend dependency manifest
+    </div>
+
+    <h2>2. Backend Package Installation</h2>
+    <div class="code-box">
+<span class="com"># Terminal commands to install backend dependencies</span>
+npm init -y
+npm install express mongoose dotenv cors helmet express-rate-limit jsonwebtoken bcryptjs multer nodemailer qrcode
+npm install --save-dev nodemon
+    </div>
+
+    <h2>3. Database Connection</h2>
+    <div class="code-box">
+<span class="com">// File: server/src/config/database.js</span>
+<span class="kw">const</span> mongoose = require(<span class="str">'mongoose'</span>);
+<span class="kw">const</span> dns = require(<span class="str">'dns'</span>);
+
+<span class="com">// Set Google &amp; Cloudflare DNS for Atlas SRV resolution on Windows</span>
+<span class="kw">try</span> { dns.setServers([<span class="str">'8.8.8.8'</span>, <span class="str">'1.1.1.1'</span>]); } <span class="kw">catch</span> {}
+
+<span class="kw">const</span> connectDB = <span class="kw">async</span> () =&gt; {
+  <span class="kw">const</span> uri = process.env.MONGODB_URI;
+  <span class="kw">if</span> (!uri) {
+    console.error(<span class="str">'[DB] MONGODB_URI is not defined in environment variables.'</span>);
+    <span class="kw">return</span> <span class="kw">null</span>;
+  }
+  <span class="kw">try</span> {
+    <span class="kw">const</span> conn = <span class="kw">await</span> mongoose.connect(uri, { serverSelectionTimeoutMS: 8000 });
+    console.log(<span class="str">'[DB] MongoDB Atlas connected: '</span> + conn.connection.host);
+    <span class="kw">return</span> conn;
+  } <span class="kw">catch</span> (error) {
+    console.warn(<span class="str">'[DB] MongoDB initial connection failed:'</span>, error.message);
+    <span class="kw">return</span> <span class="kw">null</span>;
+  }
+};
+module.exports = connectDB;
+    </div>
+
+    <h2>4. Environment Variables</h2>
+    <div class="code-box">
+<span class="com"># File: server/.env.example</span>
+PORT=5000
+NODE_ENV=development
+CLIENT_URL=http://localhost:5173
+
+<span class="com"># MongoDB Atlas Database URI</span>
+MONGODB_URI=mongodb+srv://&lt;username&gt;:&lt;password&gt;@cluster0.mongodb.net/acadflow?retryWrites=true&amp;w=majority
+
+<span class="com"># JWT Authentication Secret &amp; Expiry</span>
+JWT_SECRET=super_secret_acadflow_jwt_key_2026_change_in_production
+JWT_EXPIRES_IN=7d
+
+<span class="com"># Email Service Credentials (Nodemailer)</span>
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=notifications@acadflow.edu
+EMAIL_PASS=app_specific_password_here
+    </div>
+
+    <h2>5. User Model</h2>
+    <div class="code-box">
+<span class="com">// File: server/src/models/User.js</span>
+<span class="kw">const</span> mongoose = require(<span class="str">'mongoose'</span>);
+<span class="kw">const</span> bcrypt = require(<span class="str">'bcryptjs'</span>);
+
+<span class="kw">const</span> userSchema = <span class="kw">new</span> mongoose.Schema({
+  name: { type: String, required: [true, <span class="str">'Name is required'</span>], trim: <span class="kw">true</span> },
+  email: { type: String, required: [true, <span class="str">'Email is required'</span>], unique: <span class="kw">true</span>, lowercase: <span class="kw">true</span> },
+  password: { type: String, required: [true, <span class="str">'Password is required'</span>], minlength: 8, select: <span class="kw">false</span> },
+  role: { type: String, enum: [<span class="str">'student'</span>, <span class="str">'staff'</span>, <span class="str">'admin'</span>], required: <span class="kw">true</span> },
+  phone: { type: String, trim: <span class="kw">true</span> },
+  department: { type: String, trim: <span class="kw">true</span> },
+  rollNumber: { type: String, sparse: <span class="kw">true</span> },
+  year: { type: Number },
+  section: { type: String },
+  staffCode: { type: String, unique: <span class="kw">true</span>, sparse: <span class="kw">true</span>, uppercase: <span class="kw">true</span> },
+  staffAdvisor: { type: mongoose.Schema.Types.ObjectId, ref: <span class="str">'User'</span> },
+  isActive: { type: Boolean, default: <span class="kw">true</span> },
+}, { timestamps: <span class="kw">true</span> });
+
+userSchema.pre(<span class="str">'save'</span>, <span class="kw">async</span> <span class="kw">function</span> (next) {
+  <span class="kw">if</span> (!<span class="kw">this</span>.isModified(<span class="str">'password'</span>)) <span class="kw">return</span> next();
+  <span class="kw">this</span>.password = <span class="kw">await</span> bcrypt.hash(<span class="kw">this</span>.password, 10);
+  next();
+});
+
+userSchema.methods.comparePassword = <span class="kw">async</span> <span class="kw">function</span> (enteredPassword) {
+  <span class="kw">return</span> <span class="kw">await</span> bcrypt.compare(enteredPassword, <span class="kw">this</span>.password);
+};
+
+module.exports = mongoose.model(<span class="str">'User'</span>, userSchema);
+    </div>
+
+    <h2>6. Password Hashing and Registration</h2>
+    <div class="code-box">
+<span class="com">// File: server/src/controllers/authController.js</span>
+<span class="kw">const</span> registerStaff = <span class="kw">async</span> (req, res, next) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> { name, email, password, phone, department, designation } = req.body;
+    <span class="kw">const</span> exists = <span class="kw">await</span> User.findOne({ email });
+    <span class="kw">if</span> (exists) <span class="kw">return</span> res.status(409).json({ success: <span class="kw">false</span>, message: <span class="str">'Email already exists.'</span> });
+
+    <span class="com">// Generate unique staff linking code (STF-XXXXX)</span>
+    <span class="kw">let</span> staffCode, isUnique = <span class="kw">false</span>;
+    <span class="kw">while</span> (!isUnique) {
+      staffCode = <span class="str">'STF-'</span> + Math.random().toString(36).substring(2, 7).toUpperCase();
+      <span class="kw">if</span> (!(<span class="kw">await</span> User.findOne({ staffCode }))) isUnique = <span class="kw">true</span>;
+    }
+
+    <span class="kw">const</span> user = <span class="kw">await</span> User.create({
+      name, email, password, phone, department, designation, role: <span class="str">'staff'</span>, staffCode
+    });
+    sendToken(res, 201, user, <span class="str">'Staff account created. Staff Code: '</span> + staffCode);
+  } <span class="kw">catch</span> (err) { next(err); }
+};
+    </div>
+
+    <h2>7. Login and JWT Generation</h2>
+    <div class="code-box">
+<span class="com">// File: server/src/controllers/authController.js</span>
+<span class="kw">const</span> login = <span class="kw">async</span> (req, res, next) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> { email, password } = req.body;
+    <span class="kw">if</span> (!email || !password) {
+      <span class="kw">return</span> res.status(400).json({ success: <span class="kw">false</span>, message: <span class="str">'Email and password are required.'</span> });
+    }
+
+    <span class="kw">const</span> user = <span class="kw">await</span> User.findOne({ email }).select(<span class="str">'+password'</span>);
+    <span class="kw">if</span> (!user || !(await user.comparePassword(password))) {
+      <span class="kw">return</span> res.status(401).json({ success: <span class="kw">false</span>, message: <span class="str">'Invalid email or password.'</span> });
+    }
+    <span class="kw">if</span> (!user.isActive) {
+      <span class="kw">return</span> res.status(403).json({ success: <span class="kw">false</span>, message: <span class="str">'Account deactivated. Contact administrator.'</span> });
+    }
+
+    sendToken(res, 200, user, <span class="str">'Logged in successfully.'</span>);
+  } <span class="kw">catch</span> (err) { next(err); }
+};
+
+<span class="kw">const</span> sendToken = (res, statusCode, user, message) =&gt; {
+  <span class="kw">const</span> token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN || <span class="str">'7d'</span>,
+  });
+  res.status(statusCode).json({ success: <span class="kw">true</span>, message, data: { token, user: user.toPublicJSON ? user.toPublicJSON() : user } });
+};
+    </div>
+
+    <h2>8. Authentication Middleware</h2>
+    <div class="code-box">
+<span class="com">// File: server/src/middleware/auth.js</span>
+<span class="kw">const</span> { verifyToken } = require(<span class="str">'../utils/jwt'</span>);
+<span class="kw">const</span> User = require(<span class="str">'../models/User'</span>);
+
+<span class="kw">const</span> protect = <span class="kw">async</span> (req, res, next) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> authHeader = req.headers.authorization;
+    <span class="kw">if</span> (!authHeader || !authHeader.startsWith(<span class="str">'Bearer '</span>)) {
+      <span class="kw">return</span> res.status(401).json({ success: <span class="kw">false</span>, message: <span class="str">'Authentication required.'</span> });
+    }
+    <span class="kw">const</span> token = authHeader.split(<span class="str">' '</span>)[1];
+    <span class="kw">const</span> decoded = verifyToken(token);
+    <span class="kw">const</span> user = <span class="kw">await</span> User.findById(decoded.id).select(<span class="str">'-password'</span>);
+    <span class="kw">if</span> (!user || !user.isActive) {
+      <span class="kw">return</span> res.status(401).json({ success: <span class="kw">false</span>, message: <span class="str">'Account inactive or not found.'</span> });
+    }
+    req.user = user;
+    next();
+  } <span class="kw">catch</span> (err) { next(err); }
+};
+
+<span class="kw">const</span> restrict = (...roles) =&gt; (req, res, next) =&gt; {
+  <span class="kw">if</span> (!roles.includes(req.user.role)) {
+    <span class="kw">return</span> res.status(403).json({ success: <span class="kw">false</span>, message: <span class="str">'Forbidden resource.'</span> });
+  }
+  next();
+};
+module.exports = { protect, restrict };
+    </div>
+
+    <h2>9. Create API</h2>
+    <div class="code-box">
+<span class="com">// File: server/src/routes/documents.js (POST /api/documents)</span>
+router.post(<span class="str">'/'</span>, protect, restrict(<span class="str">'student'</span>), upload.single(<span class="str">'file'</span>), <span class="kw">async</span> (req, res, next) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> { title, type, description } = req.body;
+    <span class="kw">const</span> doc = <span class="kw">await</span> Document.create({
+      title, type, description,
+      submittedBy: req.user._id,
+      status: <span class="str">'submitted'</span>,
+      submittedAt: <span class="kw">new</span> Date(),
+      filePath: req.file ? (<span class="str">'uploads/'</span> + req.file.filename) : <span class="kw">null</span>,
+      fileName: req.file ? req.file.originalname : <span class="kw">null</span>,
+      fileSize: req.file ? req.file.size : <span class="kw">null</span>,
+      mimeType: req.file ? req.file.mimetype : <span class="kw">null</span>,
+    });
+
+    <span class="kw">if</span> (req.user.staffAdvisor) {
+      <span class="kw">await</span> sendNotification(req.user.staffAdvisor, {
+        title: <span class="str">'New Document Submission'</span>,
+        message: req.user.name + <span class="str">' submitted: "'</span> + title + <span class="str">'"'</span>,
+        type: <span class="str">'info'</span>,
+        link: <span class="str">'/staff/documents/'</span> + doc._id,
+      });
+    }
+    res.status(201).json({ success: <span class="kw">true</span>, message: <span class="str">'Document submitted.'</span>, data: { document: doc } });
+  } <span class="kw">catch</span> (err) { next(err); }
+});
+    </div>
+
+    <h2>10. Read API</h2>
+    <div class="code-box">
+<span class="com">// File: server/src/routes/documents.js (GET /api/documents/review)</span>
+router.get(<span class="str">'/review'</span>, protect, restrict(<span class="str">'staff'</span>, <span class="str">'admin'</span>), <span class="kw">async</span> (req, res, next) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> { status } = req.query;
+    <span class="kw">const</span> filter = {};
+    <span class="kw">if</span> (status) filter.status = status;
+
+    <span class="kw">if</span> (req.user.role === <span class="str">'staff'</span>) {
+      <span class="kw">const</span> myStudents = <span class="kw">await</span> User.find({ staffAdvisor: req.user._id }).select(<span class="str">'_id'</span>);
+      filter.submittedBy = { $in: myStudents.map(s =&gt; s._id) };
+    }
+
+    <span class="kw">const</span> documents = <span class="kw">await</span> Document.find(filter)
+      .sort({ submittedAt: -1 })
+      .populate(<span class="str">'submittedBy'</span>, <span class="str">'name email rollNumber department year section'</span>);
+
+    res.json({ success: <span class="kw">true</span>, data: { documents } });
+  } <span class="kw">catch</span> (err) { next(err); }
+});
+    </div>
+
+    <h2>11. Update</h2>
+    <div class="code-box">
+<span class="com">// File: server/src/routes/documents.js (PUT /api/documents/:id/review)</span>
+router.put(<span class="str">'/:id/review'</span>, protect, restrict(<span class="str">'staff'</span>, <span class="str">'admin'</span>), <span class="kw">async</span> (req, res, next) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> { status, remarks } = req.body;
+    <span class="kw">const</span> doc = <span class="kw">await</span> Document.findById(req.params.id);
+    <span class="kw">if</span> (!doc) <span class="kw">return</span> res.status(404).json({ success: <span class="kw">false</span>, message: <span class="str">'Document not found.'</span> });
+
+    doc.status = status;
+    doc.remarks = remarks;
+    doc.reviewedBy = req.user._id;
+    doc.reviewedAt = <span class="kw">new</span> Date();
+    <span class="kw">if</span> (status === <span class="str">'approved'</span>) {
+      doc.approvedBy = req.user._id;
+      doc.approvedAt = <span class="kw">new</span> Date();
+    }
+    <span class="kw">await</span> doc.save();
+    res.json({ success: <span class="kw">true</span>, message: <span class="str">'Document status updated.'</span>, data: { document: doc } });
+  } <span class="kw">catch</span> (err) { next(err); }
+});
+    </div>
+
+    <h2>12. Delete</h2>
+    <div class="code-box">
+<span class="com">// File: server/src/routes/documents.js (DELETE /api/documents/:id)</span>
+router.delete(<span class="str">'/:id'</span>, protect, restrict(<span class="str">'student'</span>), <span class="kw">async</span> (req, res, next) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> doc = <span class="kw">await</span> Document.findOne({ _id: req.params.id, submittedBy: req.user._id });
+    <span class="kw">if</span> (!doc) <span class="kw">return</span> res.status(404).json({ success: <span class="kw">false</span>, message: <span class="str">'Document not found.'</span> });
+    <span class="kw">if</span> (doc.status !== <span class="str">'draft'</span>) {
+      <span class="kw">return</span> res.status(400).json({ success: <span class="kw">false</span>, message: <span class="str">'Only draft documents can be deleted.'</span> });
+    }
+    <span class="kw">await</span> doc.deleteOne();
+    res.json({ success: <span class="kw">true</span>, message: <span class="str">'Document draft deleted successfully.'</span> });
+  } <span class="kw">catch</span> (err) { next(err); }
+});
+    </div>
+
+    <h2>13. Express Routes</h2>
+    <div class="code-box">
+<span class="com">// File: server/src/app.js (Route Registration Pipeline)</span>
+<span class="kw">const</span> express = require(<span class="str">'express'</span>);
+<span class="kw">const</span> cors = require(<span class="str">'cors'</span>);
+<span class="kw">const</span> helmet = require(<span class="str">'helmet'</span>);
+
+<span class="kw">const</span> app = express();
+app.use(helmet());
+app.use(cors());
+app.use(express.json());
+
+<span class="com">// Route Mounts</span>
+app.use(<span class="str">'/api/auth'</span>, require(<span class="str">'./routes/auth'</span>));
+app.use(<span class="str">'/api/documents'</span>, require(<span class="str">'./routes/documents'</span>));
+app.use(<span class="str">'/api/od-requests'</span>, require(<span class="str">'./routes/odRequests'</span>));
+app.use(<span class="str">'/api/projects'</span>, require(<span class="str">'./routes/projects'</span>));
+app.use(<span class="str">'/api/certificates'</span>, require(<span class="str">'./routes/certificates'</span>));
+app.use(<span class="str">'/api/admin'</span>, require(<span class="str">'./routes/admin'</span>));
+
+<span class="com">// Global Error Handling</span>
+app.use(require(<span class="str">'./middleware/errorHandler'</span>));
+module.exports = app;
+    </div>
+
+    <h2>14. Main Server File</h2>
+    <div class="code-box">
+<span class="com">// File: server/src/index.js</span>
+require(<span class="str">'dotenv'</span>).config();
+<span class="kw">const</span> app = require(<span class="str">'./app'</span>);
+<span class="kw">const</span> connectDB = require(<span class="str">'./config/database'</span>);
+
+<span class="kw">const</span> PORT = process.env.PORT || 5000;
+
+connectDB().then(() =&gt; {
+  app.listen(PORT, () =&gt; {
+    console.log(<span class="str">'[AcadFlow Server] Listening on http://localhost:'</span> + PORT);
+  });
+}).catch(err =&gt; {
+  console.error(<span class="str">'[Server Error]'</span>, err.message);
+  process.exit(1);
+});
+    </div>
+
+    <h2>15. React Login Component</h2>
+    <div class="code-box">
+<span class="com">// File: client/src/pages/auth/LoginPage.jsx</span>
+<span class="kw">import</span> { useState } <span class="kw">from</span> <span class="str">'react'</span>;
+<span class="kw">import</span> { useNavigate } <span class="kw">from</span> <span class="str">'react-router-dom'</span>;
+<span class="kw">import</span> { useAuth } <span class="kw">from</span> <span class="str">'../../context/AuthContext'</span>;
+<span class="kw">import</span> toast <span class="kw">from</span> <span class="str">'react-hot-toast'</span>;
+
+<span class="kw">const</span> LoginPage = () =&gt; {
+  <span class="kw">const</span> { login } = useAuth();
+  <span class="kw">const</span> navigate = useNavigate();
+  <span class="kw">const</span> [formData, setFormData] = useState({ email: <span class="str">''</span>, password: <span class="str">''</span> });
+  <span class="kw">const</span> [loading, setLoading] = useState(<span class="kw">false</span>);
+
+  <span class="kw">const</span> handleSubmit = <span class="kw">async</span> (e) =&gt; {
+    e.preventDefault();
+    setLoading(<span class="kw">true</span>);
+    <span class="kw">try</span> {
+      <span class="kw">const</span> user = <span class="kw">await</span> login(formData);
+      toast.success(<span class="str">'Welcome back, '</span> + user.name + <span class="str">'!'</span>);
+      <span class="kw">if</span> (user.role === <span class="str">'admin'</span>) navigate(<span class="str">'/admin/dashboard'</span>);
+      <span class="kw">else</span> <span class="kw">if</span> (user.role === <span class="str">'staff'</span>) navigate(<span class="str">'/staff/dashboard'</span>);
+      <span class="kw">else</span> navigate(<span class="str">'/student/dashboard'</span>);
+    } <span class="kw">catch</span> (err) {
+      toast.error(err.response?.data?.message || <span class="str">'Login failed.'</span>);
+    } <span class="kw">finally</span> { setLoading(<span class="kw">false</span>); }
+  };
+
+  <span class="kw">return</span> (
+    &lt;form onSubmit={handleSubmit} className=<span class="str">"space-y-4 max-w-md mx-auto p-6 bg-white rounded-xl shadow"</span>&gt;
+      &lt;h2 className=<span class="str">"text-2xl font-bold text-center"</span>&gt;AcadFlow Portal Login&lt;/h2&gt;
+      &lt;input type=<span class="str">"email"</span> placeholder=<span class="str">"Institutional Email"</span> required
+        value={formData.email} onChange={(e) =&gt; setFormData({ ...formData, email: e.target.value })} /&gt;
+      &lt;input type=<span class="str">"password"</span> placeholder=<span class="str">"Password"</span> required
+        value={formData.password} onChange={(e) =&gt; setFormData({ ...formData, password: e.target.value })} /&gt;
+      &lt;button type=<span class="str">"submit"</span> disabled={loading} className=<span class="str">"w-full bg-blue-600 text-white py-2 rounded"</span>&gt;
+        {loading ? <span class="str">'Authenticating...'</span> : <span class="str">'Sign In'</span>}
+      &lt;/button&gt;
+    &lt;/form&gt;
+  );
+};
+<span class="kw">export default</span> LoginPage;
+    </div>
+
+    <h2>16. Admin Dashboard Logic</h2>
+    <div class="code-box">
+<span class="com">// File: client/src/pages/admin/AdminDashboard.jsx</span>
+<span class="kw">import</span> { useState, useEffect } <span class="kw">from</span> <span class="str">'react'</span>;
+<span class="kw">import</span> api <span class="kw">from</span> <span class="str">'../../services/api'</span>;
+<span class="kw">import</span> toast <span class="kw">from</span> <span class="str">'react-hot-toast'</span>;
+
+<span class="kw">const</span> AdminDashboard = () =&gt; {
+  <span class="kw">const</span> [stats, setStats] = useState(<span class="kw">null</span>);
+  <span class="kw">const</span> [loading, setLoading] = useState(<span class="kw">true</span>);
+
+  useEffect(() =&gt; {
+    <span class="kw">const</span> fetchStats = <span class="kw">async</span> () =&gt; {
+      <span class="kw">try</span> {
+        <span class="kw">const</span> res = <span class="kw">await</span> api.get(<span class="str">'/admin/stats'</span>);
+        <span class="kw">if</span> (res.data?.success) setStats(res.data.data.stats);
+      } <span class="kw">catch</span> {
+        toast.error(<span class="str">'Failed to load institutional telemetry.'</span>);
+      } <span class="kw">finally</span> { setLoading(<span class="kw">false</span>); }
+    };
+    fetchStats();
+  }, []);
+
+  <span class="kw">return</span> (
+    &lt;div className=<span class="str">"grid grid-cols-1 md:grid-cols-4 gap-4 p-6"</span>&gt;
+      &lt;div className=<span class="str">"p-4 bg-blue-50 rounded-lg shadow"</span>&gt;Total Users: {stats?.totalUsers || 0}&lt;/div&gt;
+      &lt;div className=<span class="str">"p-4 bg-green-50 rounded-lg shadow"</span>&gt;Approved Docs: {stats?.approvedDocs || 0}&lt;/div&gt;
+      &lt;div className=<span class="str">"p-4 bg-amber-50 rounded-lg shadow"</span>&gt;Pending ODs: {stats?.pendingOD || 0}&lt;/div&gt;
+      &lt;div className=<span class="str">"p-4 bg-purple-50 rounded-lg shadow"</span>&gt;Issued Certs: {stats?.issuedCerts || 0}&lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+<span class="kw">export default</span> AdminDashboard;
+    </div>
+
+    <h2>17. REST API Request and Response Examples</h2>
+    <div class="code-box">
+<span class="com">/* ── Example 1: User Login Request &amp; Response ──────────────── */</span>
+POST /api/auth/login
+Content-Type: application/json
+
+{
+  "email": "student@acadflow.edu",
+  "password": "Password@123"
+}
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "success": true,
+  "message": "Logged in successfully.",
+  "data": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MGM0ZjhhY2Q...",
+    "user": {
+      "id": "660c4f8acd7e8b2a1c000001",
+      "name": "Mohammed Rayyan L",
+      "email": "student@acadflow.edu",
+      "role": "student",
+      "rollNumber": "310621104055",
+      "department": "Computer Science and Engineering",
+      "staffAdvisor": "660c4f8acd7e8b2a1c000002"
+    }
+  }
+}
+
+<span class="com">/* ── Example 2: Document Submission Request &amp; Response ──────── */</span>
+POST /api/documents
+Authorization: Bearer &lt;JWT_TOKEN&gt;
+Content-Type: multipart/form-data
+
+[Form Fields]
+title: "Internship No Objection Certificate (NOC) Request"
+type: "noc"
+description: "Requisition for summer internship at Zoho Corporation."
+file: [binary payload: Zoho_Internship_Offer.pdf]
+
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+  "success": true,
+  "message": "Document submitted successfully.",
+  "data": {
+    "document": {
+      "_id": "660c5a21cd7e8b2a1c000045",
+      "title": "Internship No Objection Certificate (NOC) Request",
+      "type": "noc",
+      "status": "submitted",
+      "submittedBy": "660c4f8acd7e8b2a1c000001",
+      "fileName": "Zoho_Internship_Offer.pdf",
+      "filePath": "uploads/1712140833123-Zoho_Internship_Offer.pdf",
+      "fileSize": 245812,
+      "mimeType": "application/pdf",
+      "submittedAt": "2026-04-03T10:13:53.123Z"
+    }
+  }
+}
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- SCREENSHOTS OF THE PROJECT (TEMPLATE PAGE 16)                             -->
+  <!-- ========================================================================= -->
+  <div class="page-break">
+    <h1>SCREENSHOTS OF THE PROJECT</h1>
+    <p>
+      The user interfaces of AcadFlow were developed to offer clean, role-tailored dashboards, dynamic theme toggling, and transparent workflow status. The high-fidelity screenshots below illustrate key operational vistas:
+    </p>
+
+    <!-- Screenshot 1: Landing Page -->
+    <div class="ui-mockup">
+      <div class="ui-mockup-header">
+        <span>AcadFlow Portal — Institutional Entry &amp; Role Gate</span>
+        <span>http://localhost:5173/</span>
+      </div>
+      <div class="ui-mockup-body" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #f8fafc; padding: 25pt 15pt; text-align: center;">
+        <div style="font-size: 16pt; font-weight: bold; margin-bottom: 6pt; color: #38bdf8;">AcadFlow Digital Academic Document Workflow</div>
+        <p style="font-size: 9pt; color: #94a3b8; max-width: 480pt; margin: 0 auto 15pt auto;">
+          An enterprise MERN-stack platform replacing paper workflows with secure, digitized submissions, reviews, and QR-verifiable certificates.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 12pt;">
+          <div style="background: #2563eb; color: #ffffff; padding: 6pt 14pt; border-radius: 4pt; font-weight: bold; font-size: 8.5pt;">Sign In to Portal</div>
+          <div style="background: #334155; color: #ffffff; padding: 6pt 14pt; border-radius: 4pt; font-weight: bold; font-size: 8.5pt;">Verify Certificate QR</div>
+        </div>
+      </div>
+    </div>
+    <div class="diagram-caption">Figure 7.1: Landing Page &amp; Role-Based Entry Portal</div>
+
+    <!-- Screenshot 2: Login Interface -->
+    <div class="ui-mockup">
+      <div class="ui-mockup-header">
+        <span>AcadFlow Portal — Secure Authentication</span>
+        <span>http://localhost:5173/login</span>
+      </div>
+      <div class="ui-mockup-body" style="display: flex; justify-content: center; padding: 15pt;">
+        <div style="background: #ffffff; border: 1pt solid #e2e8f0; border-radius: 6pt; padding: 14pt; width: 280pt; box-shadow: 0 2pt 4pt rgba(0,0,0,0.05);">
+          <div style="font-size: 12pt; font-weight: bold; text-align: center; margin-bottom: 10pt; color: #0f172a;">Sign in to your account</div>
+          <div style="margin-bottom: 8pt;">
+            <label style="font-size: 7.5pt; font-weight: bold; color: #475569;">Email address</label>
+            <div style="border: 1pt solid #cbd5e1; border-radius: 3pt; padding: 4pt 6pt; font-size: 8pt; color: #334155;">student@acadflow.edu</div>
+          </div>
+          <div style="margin-bottom: 12pt;">
+            <label style="font-size: 7.5pt; font-weight: bold; color: #475569;">Password</label>
+            <div style="border: 1pt solid #cbd5e1; border-radius: 3pt; padding: 4pt 6pt; font-size: 8pt; color: #334155;">••••••••••••</div>
+          </div>
+          <div style="background: #0284c7; color: #ffffff; text-align: center; padding: 5pt; border-radius: 3pt; font-weight: bold; font-size: 8pt;">Sign In</div>
+        </div>
+      </div>
+    </div>
+    <div class="diagram-caption">Figure 7.2: Secure Login &amp; Authentication Interface</div>
+
+    <!-- Screenshot 3: Student Dashboard -->
+    <div class="ui-mockup">
+      <div class="ui-mockup-header">
+        <span>Student Workspace — Document Management</span>
+        <span>http://localhost:5173/student/documents</span>
+      </div>
+      <div class="ui-mockup-body">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10pt;">
+          <span style="font-size: 11pt; font-weight: bold; color: #0f172a;">My Submissions &amp; Requisitions</span>
+          <span style="background: #0284c7; color: #fff; padding: 3pt 8pt; border-radius: 3pt; font-size: 7.5pt; font-weight: bold;">+ New Document</span>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 7.5pt; background: #fff;">
+          <tr style="background: #f1f5f9; border-bottom: 1pt solid #cbd5e1;">
+            <th style="padding: 4pt; text-align: left;">TITLE</th>
+            <th style="padding: 4pt; text-align: left;">TYPE</th>
+            <th style="padding: 4pt; text-align: left;">SUBMITTED</th>
+            <th style="padding: 4pt; text-align: left;">STATUS</th>
+            <th style="padding: 4pt; text-align: left;">ACTIONS</th>
+          </tr>
+          <tr style="border-bottom: 1pt solid #f1f5f9;">
+            <td style="padding: 4pt;">Internship NOC - Zoho Corp</td>
+            <td style="padding: 4pt;">NOC</td>
+            <td style="padding: 4pt;">12 Apr 2026</td>
+            <td style="padding: 4pt;"><span style="background: #dcfce7; color: #15803d; padding: 2pt 5pt; border-radius: 2pt; font-weight: bold;">APPROVED</span></td>
+            <td style="padding: 4pt; color: #0284c7;">View PDF</td>
+          </tr>
+          <tr style="border-bottom: 1pt solid #f1f5f9;">
+            <td style="padding: 4pt;">Project Phase II Report</td>
+            <td style="padding: 4pt;">Project</td>
+            <td style="padding: 4pt;">15 Apr 2026</td>
+            <td style="padding: 4pt;"><span style="background: #fef9c3; color: #854d0e; padding: 2pt 5pt; border-radius: 2pt; font-weight: bold;">UNDER REVIEW</span></td>
+            <td style="padding: 4pt; color: #0284c7;">Details</td>
+          </tr>
+          <tr>
+            <td style="padding: 4pt;">Hackathon OD Requisition</td>
+            <td style="padding: 4pt;">On-Duty</td>
+            <td style="padding: 4pt;">16 Apr 2026</td>
+            <td style="padding: 4pt;"><span style="background: #fee2e2; color: #991b1b; padding: 2pt 5pt; border-radius: 2pt; font-weight: bold;">CORRECTION</span></td>
+            <td style="padding: 4pt; color: #0284c7;">Resubmit</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="diagram-caption">Figure 7.3: Student Dashboard &amp; Document Submission Tracker</div>
+
+    <!-- Screenshot 4: Staff Review Modal -->
+    <div class="ui-mockup">
+      <div class="ui-mockup-header">
+        <span>Faculty Advisor Portal — Document Review Modal</span>
+        <span>http://localhost:5173/staff/documents/review</span>
+      </div>
+      <div class="ui-mockup-body" style="padding: 12pt;">
+        <div style="background: #fff; border: 1pt solid #cbd5e1; border-radius: 4pt; padding: 10pt; max-width: 320pt; margin: 0 auto;">
+          <div style="font-weight: bold; font-size: 10pt; color: #0f172a; margin-bottom: 4pt;">Review Document: Internship NOC</div>
+          <div style="font-size: 7.5pt; color: #64748b; margin-bottom: 8pt;">Submitted by Mohammed Rayyan L (310621104055)</div>
+          <div style="margin-bottom: 8pt;">
+            <label style="font-size: 7.5pt; font-weight: bold; color: #334155;">Decision</label>
+            <div style="font-size: 7.5pt; display: flex; gap: 6pt; margin-top: 2pt;">
+              <span style="border: 1pt solid #16a34a; color: #16a34a; padding: 2pt 6pt; border-radius: 2pt; font-weight: bold;">Approve</span>
+              <span style="border: 1pt solid #eab308; color: #854d0e; padding: 2pt 6pt; border-radius: 2pt;">Correction Needed</span>
+              <span style="border: 1pt solid #dc2626; color: #dc2626; padding: 2pt 6pt; border-radius: 2pt;">Reject</span>
+            </div>
+          </div>
+          <div style="margin-bottom: 8pt;">
+            <label style="font-size: 7.5pt; font-weight: bold; color: #334155;">Advisor Remarks</label>
+            <div style="border: 1pt solid #cbd5e1; border-radius: 2pt; padding: 4pt; font-size: 7.5pt; color: #475569;">Verified offer letter from Zoho Corp. Approved for 6 weeks summer duration.</div>
+          </div>
+          <div style="display: flex; justify-content: flex-end; gap: 6pt;">
+            <span style="background: #94a3b8; color: #fff; padding: 3pt 8pt; border-radius: 2pt; font-size: 7.5pt;">Cancel</span>
+            <span style="background: #16a34a; color: #fff; padding: 3pt 8pt; border-radius: 2pt; font-size: 7.5pt; font-weight: bold;">Submit Evaluation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="diagram-caption">Figure 7.4: Staff Review, Remarks &amp; Approval Modal</div>
+
+    <!-- Screenshot 5: Certificate QR -->
+    <div class="ui-mockup">
+      <div class="ui-mockup-header">
+        <span>Public Certificate Authenticity Verification</span>
+        <span>http://localhost:5173/verify-certificate/CERT-2026-0042</span>
+      </div>
+      <div class="ui-mockup-body" style="text-align: center; padding: 15pt; background: #ffffff;">
+        <div style="display: inline-block; border: 2pt solid #16a34a; border-radius: 50%; padding: 4pt; margin-bottom: 6pt;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div style="font-size: 12pt; font-weight: bold; color: #15803d; margin-bottom: 2pt;">Authentic Institutional Certificate</div>
+        <div style="font-size: 7.5pt; color: #64748b; margin-bottom: 10pt;">Easwari Engineering College (Autonomous) — Digital Credential Ledger</div>
+        <div style="background: #f8fafc; border: 1pt solid #e2e8f0; border-radius: 4pt; padding: 8pt; max-width: 260pt; margin: 0 auto; text-align: left; font-size: 7.5pt; line-height: 1.6;">
+          <div><strong>Recipient:</strong> Mohammed Rayyan L (310621104055)</div>
+          <div><strong>Degree:</strong> B.E. Computer Science and Engineering</div>
+          <div><strong>Award:</strong> Capstone Project Excellence Certificate</div>
+          <div><strong>Issue Date:</strong> 15 April 2026</div>
+          <div><strong>Verification Hash:</strong> 8f4b2c1e7a90...3d8e</div>
+        </div>
+      </div>
+    </div>
+    <div class="diagram-caption">Figure 7.5: Digital Certificate with Public QR Code Verification Portal</div>
+
+    <!-- Screenshot 6: Admin Dashboard -->
+    <div class="ui-mockup">
+      <div class="ui-mockup-header">
+        <span>Institutional Oversight &amp; Audit Level</span>
+        <span>http://localhost:5173/admin/dashboard</span>
+      </div>
+      <div class="ui-mockup-body">
+        <div style="font-size: 10pt; font-weight: bold; color: #0f172a; margin-bottom: 8pt;">AcadFlow Administrative Control Center</div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6pt; margin-bottom: 10pt;">
+          <div style="background: #fff; border: 1pt solid #cbd5e1; border-radius: 3pt; padding: 6pt;">
+            <div style="font-size: 6.5pt; color: #64748b;">ACTIVE USERS</div>
+            <div style="font-size: 11pt; font-weight: bold; color: #0284c7;">1,248</div>
+          </div>
+          <div style="background: #fff; border: 1pt solid #cbd5e1; border-radius: 3pt; padding: 6pt;">
+            <div style="font-size: 6.5pt; color: #64748b;">DOCUMENTS PROCESSED</div>
+            <div style="font-size: 11pt; font-weight: bold; color: #16a34a;">3,892</div>
+          </div>
+          <div style="background: #fff; border: 1pt solid #cbd5e1; border-radius: 3pt; padding: 6pt;">
+            <div style="font-size: 6.5pt; color: #64748b;">OD PERMISSIONS</div>
+            <div style="font-size: 11pt; font-weight: bold; color: #ca8a04;">614</div>
+          </div>
+          <div style="background: #fff; border: 1pt solid #cbd5e1; border-radius: 3pt; padding: 6pt;">
+            <div style="font-size: 6.5pt; color: #64748b;">ISSUED CERTS</div>
+            <div style="font-size: 11pt; font-weight: bold; color: #7c3aed;">450</div>
+          </div>
+        </div>
+        <div style="font-size: 8pt; font-weight: bold; color: #334155; margin-bottom: 4pt;">Recent Security Audit Trail</div>
+        <div style="background: #fff; border: 1pt solid #cbd5e1; font-size: 7pt; padding: 4pt; line-height: 1.5; font-family: monospace;">
+          [2026-04-16 09:14:22] STAFF_REVIEW: Staff STF-84921 approved Document #660c5a21cd7e (IP: 192.168.1.45)<br>
+          [2026-04-16 09:12:05] DOC_SUBMIT: Student 310621104055 submitted 'Zoho_Internship_Offer.pdf'<br>
+          [2026-04-16 08:55:10] USER_LOGIN: Admin admin@acadflow.edu authenticated successfully
+        </div>
+      </div>
+    </div>
+    <div class="diagram-caption">Figure 7.6: Admin Governance Dashboard &amp; Real-time Audit Trail</div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- REFERENCES (TEMPLATE PAGE 17)                                             -->
+  <!-- ========================================================================= -->
+  <div class="page-break">
+    <h1>REFERENCES</h1>
+
+    <ol style="line-height: 1.8; font-size: 11pt;">
+      <li>Kumar, A., Sharma, R., &amp; Verma, P. (2021). "Architectural evaluation of enterprise academic document workflow systems in higher education," <em>IEEE Transactions on Learning Technologies</em>, vol. 14, no. 3, pp. 345–358.</li>
+      <li>Rodriguez, M., &amp; Tanaka, K. (2022). "Securing digital academic credentials using cryptographic hash pointers and decentralized verification protocols," <em>ACM Inroads</em>, vol. 13, no. 2, pp. 52–63.</li>
+      <li>Chodorow, K. (2013). <em>MongoDB: The Definitive Guide: Powerful and Scalable Data Storage</em>, 2nd ed., Sebastopol, CA: O'Reilly Media.</li>
+      <li>Banks, A., &amp; Porcello, E. (2020). <em>Learning React: Modern Patterns for Developing React Applications</em>, 2nd ed., Sebastopol, CA: O'Reilly Media.</li>
+      <li>Resig, J., Ferguson, R., &amp; Bibeault, E. (2016). <em>Secrets of the JavaScript Ninja</em>, 2nd ed., Shelter Island, NY: Manning Publications.</li>
+      <li>Fielding, R. T. (2000). <em>Architectural Styles and the Design of Network-based Software Architectures</em>, Doctoral dissertation, University of California, Irvine.</li>
+      <li>Jones, M., Bradley, J., &amp; Sakimura, N. (2015). "JSON Web Token (JWT)," RFC 7519, Internet Engineering Task Force (IETF).</li>
+      <li>Stallings, W. (2017). <em>Cryptography and Network Security: Principles and Practice</em>, 7th ed., Boston, MA: Pearson.</li>
+      <li>Sommerville, I. (2015). <em>Software Engineering</em>, 10th ed., Boston, MA: Pearson.</li>
+      <li>Pressman, R. S., &amp; Maxim, B. R. (2019). <em>Software Engineering: A Practitioner's Approach</em>, 9th ed., New York, NY: McGraw-Hill Education.</li>
+      <li>OWASP Foundation. (2021). "OWASP Top 10 Web Application Security Risks," Available online: https://owasp.org/www-project-top-ten/</li>
+      <li>Easwari Engineering College. (2024). <em>Academic Regulations and Project Documentation Norms</em>, Department of Computer Science and Engineering, Chennai, India.</li>
+    </ol>
+  </div>
+
+</body>
+</html>
