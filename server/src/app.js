@@ -14,19 +14,38 @@ const app = express();
 app.use(helmet());
 
 // ─── CORS ─────────────────────────────────────────────────────────────────────
-const allowedOrigins = [
-  process.env.CLIENT_URL || 'http://localhost:6100',
+const configuredOrigins = process.env.CLIENT_URL
+  ? process.env.CLIENT_URL.split(',').map((u) => u.trim().replace(/\/$/, ''))
+  : [];
+
+const defaultOrigins = [
   'http://localhost:6100',
   'http://127.0.0.1:6100',
   'http://localhost:5173',
   'http://127.0.0.1:5173',
+  'http://localhost:6000',
+  'http://127.0.0.1:6000',
 ];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (e.g., curl, Postman) in development
-      if (!origin || allowedOrigins.includes(origin)) {
+      // Allow requests with no origin (e.g. curl, Postman, server-to-server)
+      if (!origin) return callback(null, true);
+
+      // Allow wildcard in environment
+      if (process.env.CLIENT_URL === '*' || process.env.NODE_ENV === 'development') {
+        return callback(null, true);
+      }
+
+      const cleanOrigin = origin.replace(/\/$/, '');
+      const isAllowed =
+        configuredOrigins.includes(cleanOrigin) ||
+        defaultOrigins.includes(cleanOrigin) ||
+        cleanOrigin.endsWith('.vercel.app') ||
+        cleanOrigin.endsWith('.onrender.com');
+
+      if (isAllowed) {
         callback(null, true);
       } else {
         callback(new Error(`CORS policy: Origin ${origin} not allowed`));
